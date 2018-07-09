@@ -50,11 +50,11 @@ if __name__ == "__main__":
         try:
             name = soup.find_all('td')[0]
             type = soup.find_all('td')[1]
-            winner = soup.find_all('td')[6]
+            winner = soup.find_all('td')[7]
         
             print("Lokasi:", loc_localize, "\n")
-            print(name.contents[0])
-            print(type.contents[0])
+            print(name.get_text())
+            print(type.get_text())
             print(winner.get_text())
         except IndexError:
             print("Lokasi:", loc_localize, "\n")
