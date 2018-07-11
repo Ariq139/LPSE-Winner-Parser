@@ -1,6 +1,7 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys
+import winner_get
 
 totaldone = 0
 loc_code = ""
@@ -81,15 +82,18 @@ def getAuct(loc):
             if str(e.code) != "500": #range id lelang out limit, halaman error
                 auctID += 1
             else: #failsafe
-                if auctID < 2500 and loc == "sleman":
+                if auctID < 2600 and loc == "sleman":
                     auctID += 1
-                elif auctID < 3000 and loc == "jogjakota":
-                    auctID += 1
-                elif auctID < 6000 and loc == "jogjaprov":
+                elif auctID < 3400 and loc == "jogjakota":
+                    auctID += 1 #down juga?
+                elif auctID < 5000 and loc == "jogjaprov":
                     auctID += 1
                 elif auctID < 1000 and loc == "ugm":
                     auctID += 1
-                    
+                #elif auctID < 1000 and loc == "gunungkidulkab":
+                    #auctID += 1 #websitenya down
+                #elif auctID < 1000 and loc == "bantulkab":
+                    #auctID += 1 #websitenya down    
                 else:
                     broken = True
                     print("Total = "+ str(totaldone))
@@ -103,14 +107,11 @@ def getAuct(loc):
             if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai":
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Hit!")
                 totaldone += 1
-                auctID += 1
-            
-            elif temp.find_all('td')[4].get_text() == "Tidak Ada Jadwal":
-                print("Checking LPSE "+loc_check+"....("+str(auctID)+")....Tidak Ada Jadwal")
+                winner_get.getData(str(auctID)+loc_code, totaldone)
                 auctID += 1
             
             else:
-                print("miss")
+                print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Miss!")
                 auctID += 1
         
 if __name__ == "__main__":
