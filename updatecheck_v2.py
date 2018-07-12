@@ -90,10 +90,10 @@ def getAuct(loc):
                     auctID += 1
                 elif auctID < 1000 and loc == "ugm":
                     auctID += 1
-                #elif auctID < 1000 and loc == "gunungkidulkab":
-                    #auctID += 1 #websitenya down
-                #elif auctID < 1000 and loc == "bantulkab":
-                    #auctID += 1 #websitenya down    
+                elif auctID < 1000 and loc == "gunungkidulkab":
+                    auctID += 1 #websitenya down
+                elif auctID < 1000 and loc == "bantulkab":
+                    auctID += 1 #websitenya down    
                 else:
                     broken = True
                     print("Total = "+ str(totaldone))
@@ -107,7 +107,7 @@ def getAuct(loc):
             if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai":
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Hit!")
                 totaldone += 1
-                winner_get.getData(str(auctID)+loc_code, totaldone)
+                winner_get.getData(str(auctID)+loc_code, totaldone, loc)
                 auctID += 1
             
             else:

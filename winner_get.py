@@ -6,7 +6,7 @@ import google_spreadsheet_update
 loc = ""
 loc_localize = ""
 
-def getData(auct_id, num):
+def getData(auct_id, num, loc_):
     global loc
     global loc_localize
     
@@ -63,7 +63,7 @@ def getData(auct_id, num):
             loc = ""
             loc_localize = ""
             
-            google_spreadsheet_update.updateGSheet(num, name, type, instance, winner)
+            google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
             
         except IndexError:
             print("Lokasi:", loc_localize, "\n")
@@ -73,6 +73,7 @@ def getData(auct_id, num):
 
 if __name__ == "__main__":
     auct_id = str(sys.argv[1])
-    num = int(sys.argv[1])
+    num = int(sys.argv[2])
+    loc_ = str(sys.argv[3])
 
-    getData(auct_id, num)
+    getData(auct_id, num, loc_)
