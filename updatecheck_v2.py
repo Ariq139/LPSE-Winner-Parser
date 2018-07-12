@@ -7,7 +7,6 @@ totaldone = 0
 loc_code = ""
 loc_check = ""
 loc_web = ""
-auctID = 1
 
 def getURL(loc, id):
     html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/lelang/"+id+"/pengumumanlelang")
@@ -56,7 +55,7 @@ def checkLoc(loc):
         loc_check = "Bantul"
         loc_web = "bantulkab.go"
     
-def getAuct(loc):
+def getAuct(loc, start=1):
     
     global totaldone
     global loc_code
@@ -67,6 +66,8 @@ def getAuct(loc):
     broken = False
     
     checkLoc(loc)
+    
+    auctID = start
         
     while broken == False:
         try:
@@ -83,17 +84,17 @@ def getAuct(loc):
                 auctID += 1
             else: #failsafe
                 if auctID < 2600 and loc == "sleman":
-                    auctID += 1
+                    auctID += 1 #ssl cert error
                 elif auctID < 3400 and loc == "jogjakota":
                     auctID += 1 #down juga?
                 elif auctID < 5000 and loc == "jogjaprov":
                     auctID += 1
                 elif auctID < 1000 and loc == "ugm":
                     auctID += 1
-                elif auctID < 1000 and loc == "gunungkidulkab":
-                    auctID += 1 #websitenya down
-                elif auctID < 1000 and loc == "bantulkab":
-                    auctID += 1 #websitenya down    
+                elif auctID < 1000 and loc == "gunungkidul":
+                    auctID += 1
+                elif auctID < 1000 and loc == "bantul":
+                    auctID += 1
                 else:
                     broken = True
                     print("Total = "+ str(totaldone))
@@ -116,5 +117,6 @@ def getAuct(loc):
         
 if __name__ == "__main__":
     loc = str(sys.argv[1])
+    start = int(sys.argv[2])
 
-    getAuct(loc)
+    getAuct(loc, start)
