@@ -24,7 +24,7 @@ def getData(auct_id, num, loc_):
         loc_localize += "LPSE Sleman"
     elif auct_id.endswith("013"):
         loc += "jogjaprov.go"
-        loc_localize += "LPSE Provinsi Yogyakarta"
+        loc_localize += "LPSE Provinsi DI Yogyakarta"
     elif auct_id.endswith("621"):
         loc += "gunungkidulkab.go"
         loc_localize += "LPSE Gunungkidul"

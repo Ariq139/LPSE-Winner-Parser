@@ -95,7 +95,7 @@ def getAuct(loc, start=1):
             if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai":
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Hit!")
                 totaldone += 1
-                winner_get.getData(str(auctID)+loc_code, totaldone, loc)
+                winner_get.getData(str(auctID)+loc_code, auctID, loc)
                 auctID += 1
             
             else:
