@@ -66,7 +66,6 @@ def getData(auct_id, num, loc_):
             google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
             
         except IndexError:
-            print("Lokasi:", loc_localize, "\n")
             print("Pemenang tidak ditemukan")
             loc = ""
             loc_localize = ""

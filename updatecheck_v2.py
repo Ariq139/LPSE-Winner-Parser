@@ -82,22 +82,9 @@ def getAuct(loc, start=1):
             print('Error code: ', e.code)
             if str(e.code) != "500": #range id lelang out limit, halaman error
                 auctID += 1
-            else: #failsafe
-                if auctID < 2600 and loc == "sleman":
-                    auctID += 1 #ssl cert error
-                elif auctID < 3400 and loc == "jogjakota":
-                    auctID += 1 #down juga?
-                elif auctID < 5000 and loc == "jogjaprov":
-                    auctID += 1
-                elif auctID < 1000 and loc == "ugm":
-                    auctID += 1
-                elif auctID < 1000 and loc == "gunungkidul":
-                    auctID += 1
-                elif auctID < 1000 and loc == "bantul":
-                    auctID += 1
-                else:
-                    broken = True
-                    print("Total = "+ str(totaldone))
+            else:
+                broken = True
+                print("Total = "+ str(totaldone) + "Stopped at "+str(auctID)+loc_code)
                     
         except urllib.error.URLError as e:
             print('Failed to reach a server.')
