@@ -31,9 +31,7 @@ def getData(auct_id, num, loc_):
     elif auct_id.endswith("285"):
         loc += "bantulkab.go"
         loc_localize += "LPSE Bantul"
-    
-    #web = str(input('Site: '))
-    #print("NOTE: Area Jogja")
+
     try:
         html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/evaluasi/"+auct_id+"/pemenang")
         #print(html.read())
@@ -41,24 +39,16 @@ def getData(auct_id, num, loc_):
         #print(soup.prettify())
 
     except urllib.error.HTTPError as e:
-        print("The server couldn't fulfill the request.")
-        print('Error code: ', e.code)
+        print('Error: ', e.code)
         
     except urllib.error.URLError as e:
-        print('Failed to reach a server.')
-        print('Reason: ', e.reason)
+        print('Error: ', e.reason)
     else:
         try:
             name = soup.find_all('td')[0].get_text()
             type = soup.find_all('td')[1].get_text()
             instance = soup.find_all('td')[2].get_text()
             winner = soup.find_all('td')[7].get_text()
-        
-            #print("Lokasi:", loc_localize, "\n")
-            #print(name)
-            #print(type)
-            #print(instance)
-            #print(winner)
             
             loc = ""
             loc_localize = ""
