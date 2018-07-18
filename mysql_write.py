@@ -6,7 +6,7 @@ def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
                               host=srv)
     cursor = cnx.cursor()
     
-    db_create = ("CREATE DATABASE IF NOT EXISTS "+%s);
+    db_create = ("CREATE DATABASE IF NOT EXISTS %s");
     db_data = (db);
     
     cursor.execute(db_create, db_data)
