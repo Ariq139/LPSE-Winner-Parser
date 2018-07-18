@@ -94,7 +94,7 @@ def getAuct(loc, start):
                     auctID += 1
                 elif auctID < 2200 and loc == "bantul":
                     auctID += 1
-                elif auctID < 2000 and loc == "kulonprogo":
+                elif auctID < 2100 and loc == "kulonprogo":
                     auctID += 1
                 else:
                     broken = True
