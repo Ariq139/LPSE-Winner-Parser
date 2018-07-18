@@ -85,13 +85,13 @@ def getAuct(loc, start):
                     auctID += 1 #ssl cert error
                 elif auctID < 3400 and loc == "jogjakota":
                     auctID += 1 
-                elif auctID < 5000 and loc == "jogjaprov":
+                elif auctID < 6000 and loc == "jogjaprov":
                     auctID += 1
                 elif auctID < 1100 and loc == "ugm":
                     auctID += 1
                 elif auctID < 1800 and loc == "gunungkidul":
                     auctID += 1
-                elif auctID < 2000 and loc == "bantul":
+                elif auctID < 2200 and loc == "bantul":
                     auctID += 1
                 else:
                     broken = True

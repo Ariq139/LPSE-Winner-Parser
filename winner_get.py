@@ -1,7 +1,8 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys
-import google_spreadsheet_update
+#import google_spreadsheet_update
+import mysql_write
 
 loc = ""
 loc_localize = ""
@@ -53,7 +54,8 @@ def getData(auct_id, num, loc_):
             loc = ""
             loc_localize = ""
             
-            google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
+            #google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
+            mysql_write.writeData("root", "", "localhost", "pkl", auct_id, name, type, instance, winner, loc_)
             
         except IndexError:
             print("Pemenang tidak ditemukan")
