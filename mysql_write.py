@@ -6,10 +6,17 @@ def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
                               host=srv)
     cursor = cnx.cursor()
     
-    db_create = ("CREATE DATABASE IF NOT EXISTS %s");
-    db_data = (db);
+    db_create = ("CREATE DATABASE IF NOT EXISTS "+db);
     
-    cursor.execute(db_create, db_data)
+    cursor.execute(db_create, "")
+    
+    cnx.commit()
+
+    cursor.close()
+    cnx.close()
+    
+    cnx = mysql.connector.connect(user=usr, password=pw, host=srv, database=db)
+    cursor = cnx.cursor()
     
     table_create = ("CREATE TABLE IF NOT EXISTS `"+db+"`.`"+loc_+"` (`ID` varchar(8), `Nama Lelang` varchar(255), `Tipe` varchar(64), `Instansi` varchar(64), `Pemenang` varchar(255))")
     
