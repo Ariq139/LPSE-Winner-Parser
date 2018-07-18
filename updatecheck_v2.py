@@ -94,6 +94,8 @@ def getAuct(loc, start):
                     auctID += 1
                 elif auctID < 2200 and loc == "bantul":
                     auctID += 1
+                elif auctID < 2000 and loc == "kulonprogo":
+                    auctID += 1
                 else:
                     broken = True
                     print("Total = "+ str(totaldone) + ", stopped at "+str(auctID)+loc_code)
@@ -104,14 +106,14 @@ def getAuct(loc, start):
             auctID += 1
     
         else:
-            if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai":
+            if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai" or temp.find_all('td')[9].get_text() == "Lelang Sudah Selesai":
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Hit!")
                 totaldone += 1
                 winner_get.getData(str(auctID)+loc_code, auctID, loc)
                 auctID += 1
-            
             else:
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Miss!")
+                #print(temp.find_all('td')[4].get_text())
                 auctID += 1
         
 if __name__ == "__main__":

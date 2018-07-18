@@ -2,8 +2,7 @@
 import mysql.connector, sys
 
 def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
-    cnx = mysql.connector.connect(user=usr, password=pw,
-                              host=srv)
+    cnx = mysql.connector.connect(user=usr, password=pw, host=srv)
     cursor = cnx.cursor()
     
     db_create = ("CREATE DATABASE IF NOT EXISTS "+db);
@@ -11,9 +10,6 @@ def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
     cursor.execute(db_create, "")
     
     cnx.commit()
-
-    cursor.close()
-    cnx.close()
     
     cnx = mysql.connector.connect(user=usr, password=pw, host=srv, database=db)
     cursor = cnx.cursor()
