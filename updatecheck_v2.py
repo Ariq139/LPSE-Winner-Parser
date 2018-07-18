@@ -25,10 +25,11 @@ def checkLoc(loc):
         loc_check = "UGM"
         loc_web += "ugm.ac" #1
         
-    elif str_id.endswith("367"):
-        loc += "kulonprogokab.go"
-        loc_localize += "LPSE Kulon Progo" #2
-               
+    elif loc == "kulonprogo":
+        loc_code = "367"
+        loc_web = "kulonprogokab.go"
+        loc_check = "Kulon Progo" #2
+        
     elif loc == "jogjakota":
         loc_code = "021"
         loc_check = "Yogyakarta Kota"

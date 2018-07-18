@@ -20,6 +20,8 @@ def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
     
     table_create = ("CREATE TABLE IF NOT EXISTS `"+db+"`.`"+loc_+"` (`ID` varchar(8), `Nama Lelang` varchar(255), `Tipe` varchar(64), `Instansi` varchar(64), `Pemenang` varchar(255))")
     
+    cursor.execute(table_create, "")
+    
     add_entry = ("INSERT INTO "+loc_+" VALUES (%s, %s, %s, %s, %s)")
     entry_data = (id, name, type, instance, winner)
     
