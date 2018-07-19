@@ -1,6 +1,6 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
-import urllib.request, urllib.error, sys
+import urllib.request, urllib.error, sys, ssl
 #import google_spreadsheet_update
 import mysql_write
 
@@ -34,10 +34,13 @@ def getData(auct_id, num, loc_):
         loc_localize += "LPSE Bantul"
 
     try:
-        html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/evaluasi/"+auct_id+"/pemenang")
-        #print(html.read())
-        soup = BS(html, 'html.parser')
-        #print(soup.prettify())
+        if not auct_id.endswith("054"):
+            html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/evaluasi/"+auct_id+"/pemenang")
+            soup = BS(html, 'html.parser')
+        else:
+            context = ssl._create_unverified_context()
+            html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/evaluasi/"+auct_id+"/pemenang", context=context)
+            soup = BS(html, 'html.parser')
 
     except urllib.error.HTTPError as e:
         print('Error: ', e.code)
@@ -49,7 +52,10 @@ def getData(auct_id, num, loc_):
             name = soup.find_all('td')[0].get_text()
             type = soup.find_all('td')[1].get_text()
             instance = soup.find_all('td')[2].get_text()
-            winner = soup.find_all('td')[7].get_text()
+            if not auct_id.endswith("054"):
+                winner = soup.find_all('td')[7].get_text()
+            else:
+                winner = soup.find_all('td')[6].get_text()
             
             loc = ""
             loc_localize = ""

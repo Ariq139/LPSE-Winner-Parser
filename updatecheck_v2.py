@@ -1,6 +1,6 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
-import urllib.request, urllib.error, sys
+import urllib.request, urllib.error, sys, ssl
 import winner_get
 
 totaldone = 0
@@ -10,6 +10,13 @@ loc_web = ""
 
 def getURL(loc, id):
     html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/lelang/"+id+"/pengumumanlelang")
+    soup = BS(html, 'html.parser')
+    
+    return soup
+
+def getURL_NoSSL(loc, id):
+    context = ssl._create_unverified_context()
+    html = urllib.request.urlopen("http://lpse."+loc+".id/eproc4/lelang/"+id+"/pengumumanlelang", context=context)
     soup = BS(html, 'html.parser')
     
     return soup
@@ -71,8 +78,10 @@ def getAuct(loc, start):
         
     while broken == False:
         try:
-            temp = getURL(loc_web, str(auctID)+loc_code)
-        
+            if loc != "sleman":
+                temp = getURL(loc_web, str(auctID)+loc_code)
+            else:
+                temp = getURL_NoSSL(loc_web, str(auctID)+loc_code)
         except TimeoutError as e:
             print("Timeout.")
             auctID += 0
