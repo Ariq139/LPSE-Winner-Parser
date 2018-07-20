@@ -34,6 +34,7 @@ def auctIDCheck(auct_id):
 def getData(auct_id, loc_):
     global loc
     global loc_localize
+    global extend
     
     auctIDCheck(auct_id)
     
