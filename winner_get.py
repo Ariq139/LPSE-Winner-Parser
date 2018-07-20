@@ -1,13 +1,17 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys, ssl
+#import google_spreadsheet_update
 import mysql_write
 
 loc = ""
 loc_localize = ""
 extend = ""
 
-def auctIDCheck(auct_id):
+def getData(auct_id, num, loc_):
+    global loc
+    global loc_localize
+    
     if auct_id.endswith("303"):
         loc = "ugm.ac"
         loc_localize = "LPSE UGM"
@@ -64,6 +68,12 @@ def getData(auct_id, loc_):
             else:
                 winner = soup.find_all('td')[6].get_text()
             
+            loc = ""
+            loc_localize = ""
+            
+            #google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
+            mysql_write.writeData("root", "", "localhost", "pkl", auct_id, name, type, instance, winner, loc_)
+            
         except IndexError:
             print("Pemenang tidak ditemukan")
         
@@ -72,6 +82,7 @@ def getData(auct_id, loc_):
         
 if __name__ == "__main__":
     auct_id = str(sys.argv[1])
-    loc_ = str(sys.argv[2])
+    num = int(sys.argv[2])
+    loc_ = str(sys.argv[3])
 
-    getData(auct_id, loc_)
+    getData(auct_id, num, loc_)
