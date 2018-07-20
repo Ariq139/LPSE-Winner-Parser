@@ -1,13 +1,12 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys, ssl
-#import google_spreadsheet_update
 import mysql_write
 
 loc = ""
 loc_localize = ""
 
-def getData(auct_id, num, loc_):
+def getData(auct_id, loc_):
     global loc
     global loc_localize
     
@@ -60,7 +59,6 @@ def getData(auct_id, num, loc_):
             loc = ""
             loc_localize = ""
             
-            #google_spreadsheet_update.updateGSheet(num, name, type, instance, winner, auct_id, loc_)
             mysql_write.writeData("root", "", "localhost", "pkl", auct_id, name, type, instance, winner, loc_)
             
         except IndexError:
@@ -70,7 +68,6 @@ def getData(auct_id, num, loc_):
 
 if __name__ == "__main__":
     auct_id = str(sys.argv[1])
-    num = int(sys.argv[2])
-    loc_ = str(sys.argv[3])
+    loc_ = str(sys.argv[2])
 
-    getData(auct_id, num, loc_)
+    getData(auct_id, loc_)
