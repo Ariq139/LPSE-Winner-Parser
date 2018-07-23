@@ -87,15 +87,15 @@ def getAuct(loc, start):
             auctID += 0
         
         except urllib.error.HTTPError as e:
-            print('Error code: ', e.code)
+            print('Error: ', e.code)
             if str(e.code) != "500": #range id lelang out limit/halaman error
                 auctID += 1
             else: #failsafe
                 if auctID < 2900 and loc == "sleman":
                     auctID += 1 #ssl cert error
-                elif auctID < 3400 and loc == "jogjakota":
+                elif auctID < 3800 and loc == "jogjakota":
                     auctID += 1 
-                elif auctID < 6000 and loc == "jogjaprov":
+                elif auctID < 6800 and loc == "jogjaprov":
                     auctID += 1
                 elif auctID < 1100 and loc == "ugm":
                     auctID += 1
@@ -110,19 +110,17 @@ def getAuct(loc, start):
                     print("Total = "+ str(totaldone) + ", stopped at "+str(auctID)+loc_code)
                     
         except urllib.error.URLError as e:
-            print('Failed to reach a server.')
-            print('Reason: ', e.reason)
+            print('Error: ', e.reason)
             auctID += 1
     
         else:
-            if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai" or temp.find_all('td')[9].get_text() == "Lelang Sudah Selesai":
+            if temp.find_all('td')[4].get_text() == "Lelang Sudah Selesai" or temp.find_all('td')[9].get_text() == "Lelang Sudah Selesai" or temp.find_all('td')[5].get_text() == "Lelang Sudah Selesai" or temp.find_all('td')[10].get_text() == "Lelang Sudah Selesai":
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Hit!")
                 totaldone += 1
-                winner_get.getData(str(auctID)+loc_code, auctID, loc)
+                winner_get.getData(str(auctID)+loc_code, loc)
                 auctID += 1
             else:
                 print("Checking LPSE "+loc_check+"....("+str(auctID)+").....Miss!")
-                #print(temp.find_all('td')[4].get_text())
                 auctID += 1
         
 if __name__ == "__main__":

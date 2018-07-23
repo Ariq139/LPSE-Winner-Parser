@@ -1,0 +1,31 @@
+//count
+select pemenang, count(*) from 
+(SELECT * FROM pkl.bantul b UNION ALL 
+ SELECT * FROM pkl.gunungkidul gk UNION ALL 
+ SELECT * FROM pkl.jogjakota jk UNION ALL 
+ SELECT * FROM pkl.jogjaprov jp UNION ALL 
+ SELECT * FROM pkl.kulonprogo kp UNION ALL 
+ SELECT * FROM pkl.sleman s UNION ALL 
+ SELECT * FROM pkl.ugm u) x 
+ group by pemenang order by count(*) desc limit 10
+ 
+ 
+ //detailed
+select id, instansi, pemenang from 
+(SELECT * FROM pkl.bantul b UNION ALL 
+ SELECT * FROM pkl.gunungkidul gk UNION ALL 
+ SELECT * FROM pkl.jogjakota jk UNION ALL 
+ SELECT * FROM pkl.jogjaprov jp UNION ALL 
+ SELECT * FROM pkl.kulonprogo kp UNION ALL 
+ SELECT * FROM pkl.sleman s UNION ALL 
+ SELECT * FROM pkl.ugm u) x 
+ where pemenang in 
+(select pemenang from (select pemenang, count(*) from 
+(SELECT * FROM pkl.bantul b UNION ALL 
+ SELECT * FROM pkl.gunungkidul gk UNION ALL 
+ SELECT * FROM pkl.jogjakota jk UNION ALL 
+ SELECT * FROM pkl.jogjaprov jp UNION ALL 
+ SELECT * FROM pkl.kulonprogo kp UNION ALL 
+ SELECT * FROM pkl.sleman s UNION ALL 
+ SELECT * FROM pkl.ugm u) x 
+ group by pemenang order by count(*) desc limit 10) x)
