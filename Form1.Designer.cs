@@ -72,6 +72,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.searchLocTab = new System.Windows.Forms.TabPage();
+            this.locGraph = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.locCombo = new System.Windows.Forms.ComboBox();
@@ -80,7 +81,6 @@
             this.locGet = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchIDTab = new System.Windows.Forms.TabControl();
-            this.locGraph = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -528,6 +528,15 @@
             this.searchLocTab.Text = "Search by Location";
             this.searchLocTab.UseVisualStyleBackColor = true;
             // 
+            // locGraph
+            // 
+            this.locGraph.Location = new System.Drawing.Point(401, 25);
+            this.locGraph.Name = "locGraph";
+            this.locGraph.Size = new System.Drawing.Size(75, 23);
+            this.locGraph.TabIndex = 16;
+            this.locGraph.Text = "Open graph";
+            this.locGraph.UseVisualStyleBackColor = true;
+            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -550,6 +559,7 @@
             this.locCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.locCombo.FormattingEnabled = true;
             this.locCombo.Items.AddRange(new object[] {
+            "Semua",
             "Bantul",
             "Kulonprogo",
             "Sleman",
@@ -567,6 +577,7 @@
             this.typeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCombo.FormattingEnabled = true;
             this.typeCombo.Items.AddRange(new object[] {
+            "Semua",
             "Pengadaan Barang",
             "Pekerjaan Kontruksi",
             "Jasa Konsultasi Badan Usaha",
@@ -614,15 +625,6 @@
             this.searchIDTab.SelectedIndex = 0;
             this.searchIDTab.Size = new System.Drawing.Size(518, 302);
             this.searchIDTab.TabIndex = 0;
-            // 
-            // locGraph
-            // 
-            this.locGraph.Location = new System.Drawing.Point(401, 25);
-            this.locGraph.Name = "locGraph";
-            this.locGraph.Size = new System.Drawing.Size(75, 23);
-            this.locGraph.TabIndex = 16;
-            this.locGraph.Text = "Open graph";
-            this.locGraph.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

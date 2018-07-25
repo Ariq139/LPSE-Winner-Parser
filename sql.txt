@@ -29,3 +29,7 @@ select id, instansi, pemenang from
  SELECT * FROM pkl.sleman s UNION ALL 
  SELECT * FROM pkl.ugm u) x 
  group by pemenang order by count(*) desc limit 10) x)
+ 
+ 
+ //export to csv
+SELECT * INTO OUTFILE "D:\\result.csv" FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM pkl.ugm 

@@ -59,15 +59,5 @@ namespace LPSE_UGM_Winner_Parser.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lelang {
-            get {
-                object obj = ResourceManager.GetObject("lelang", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
