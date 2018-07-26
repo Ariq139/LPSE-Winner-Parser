@@ -54,8 +54,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.detailSearchGet = new System.Windows.Forms.Button();
             this.idGet = new System.Windows.Forms.Button();
@@ -127,8 +125,9 @@
             this.topGraph.Name = "topGraph";
             this.topGraph.Size = new System.Drawing.Size(157, 23);
             this.topGraph.TabIndex = 22;
-            this.topGraph.Text = "Open the graph in Gephi";
+            this.topGraph.Text = "Open detail";
             this.topGraph.UseVisualStyleBackColor = true;
+            this.topGraph.Click += new System.EventHandler(this.topGraph_Click);
             // 
             // amount10
             // 
@@ -138,7 +137,6 @@
             this.amount10.Size = new System.Drawing.Size(40, 13);
             this.amount10.TabIndex = 21;
             this.amount10.Text = "Jumlah";
-            this.amount10.Click += new System.EventHandler(this.label15_Click);
             // 
             // amount9
             // 
@@ -301,7 +299,6 @@
             this.rank2.Size = new System.Drawing.Size(58, 13);
             this.rank2.TabIndex = 3;
             this.rank2.Text = "Pemenang";
-            this.rank2.Click += new System.EventHandler(this.label7_Click);
             // 
             // rank1
             // 
@@ -342,24 +339,10 @@
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.checkForUpdateToolStripMenuItem,
-            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // checkForUpdateToolStripMenuItem
-            // 
-            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.helpToolStripMenuItem.Text = "About";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -436,7 +419,6 @@
             this.typeSearch.Size = new System.Drawing.Size(41, 13);
             this.typeSearch.TabIndex = 8;
             this.typeSearch.Text = "label14";
-            this.typeSearch.Click += new System.EventHandler(this.label14_Click);
             // 
             // instanceSearch
             // 
@@ -559,7 +541,6 @@
             this.locCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.locCombo.FormattingEnabled = true;
             this.locCombo.Items.AddRange(new object[] {
-            "Semua",
             "Bantul",
             "Kulonprogo",
             "Sleman",
@@ -586,7 +567,6 @@
             this.typeCombo.Name = "typeCombo";
             this.typeCombo.Size = new System.Drawing.Size(121, 21);
             this.typeCombo.TabIndex = 12;
-            this.typeCombo.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -605,7 +585,6 @@
             this.locGet.TabIndex = 2;
             this.locGet.Text = "Get Data";
             this.locGet.UseVisualStyleBackColor = true;
-            this.locGet.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -656,8 +635,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Label rank5;
         private System.Windows.Forms.Label rank4;
         private System.Windows.Forms.Label rank3;
