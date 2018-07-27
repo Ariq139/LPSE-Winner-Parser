@@ -8,6 +8,7 @@ namespace LPSE_UGM_Winner_Parser
 {
     static class Program
     {
+        public static string server, port, user, pass, db;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,8 @@ namespace LPSE_UGM_Winner_Parser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            new db_login().Show();
+            Application.Run();
         }
     }
 }

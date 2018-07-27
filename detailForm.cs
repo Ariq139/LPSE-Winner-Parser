@@ -13,9 +13,6 @@ namespace LPSE_UGM_Winner_Parser
 {
     public partial class detailForm : Form
     {
-        MySqlConnection mysql_con;
-        MySqlCommand command;
-
         public detailForm()
         {
             InitializeComponent();
@@ -36,6 +33,32 @@ namespace LPSE_UGM_Winner_Parser
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void detailForm_Load(object sender, EventArgs e)
+        {
+            getData_Detail();
+        }
+
+        private void getData_Detail()
+        {
+            DataTable dt = new DataTable();
+            string connect = "server=localhost;user=root;password=;database=pkl;";
+            string command = "select * from (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x where pemenang in (select pemenang from (select pemenang, count(*) from (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x group by pemenang order by count(*) desc limit 10) x)";
+            using (MySqlConnection conn = new MySqlConnection(connect))
+            {
+                MySqlCommand cmd = new MySqlCommand(command, conn);
+                conn.Open();
+                MySqlDataReader read = cmd.ExecuteReader();
+                dt.Load(read);
+
+                if (dt.Rows.Count > 0)
+                {
+                    dataDetail.DataSource = dt;
+                }
+
+                conn.Close();
+            }
         }
     }
 }

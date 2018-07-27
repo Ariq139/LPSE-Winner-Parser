@@ -118,6 +118,9 @@
       <HintPath>packages\IKVM.8.1.5717.0\lib\IKVM.Runtime.JNI.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -137,6 +140,12 @@
     <Compile Include="aboutBox.Designer.cs">
       <DependentUpon>aboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="db_login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="db_login.Designer.cs">
+      <DependentUpon>db_login.cs</DependentUpon>
+    </Compile>
     <Compile Include="detailForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +162,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="aboutBox.resx">
       <DependentUpon>aboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="db_login.resx">
+      <DependentUpon>db_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="detailForm.resx">
       <DependentUpon>detailForm.cs</DependentUpon>

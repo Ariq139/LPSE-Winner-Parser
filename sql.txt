@@ -1,5 +1,5 @@
 //count
-select pemenang, count(*) from 
+select pemenang Pemenang, count(*) Jumlah from 
 (SELECT * FROM pkl.bantul b UNION ALL 
  SELECT * FROM pkl.gunungkidul gk UNION ALL 
  SELECT * FROM pkl.jogjakota jk UNION ALL 
@@ -11,7 +11,7 @@ select pemenang, count(*) from
  
  
  //detailed
-select id, instansi, pemenang from 
+select * from 
 (SELECT * FROM pkl.bantul b UNION ALL 
  SELECT * FROM pkl.gunungkidul gk UNION ALL 
  SELECT * FROM pkl.jogjakota jk UNION ALL 
