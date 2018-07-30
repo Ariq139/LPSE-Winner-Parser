@@ -17,8 +17,7 @@ namespace LPSE_UGM_Winner_Parser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new db_login().Show();
-            Application.Run();
+            Application.Run(new db_login());
         }
     }
 }

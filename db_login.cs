@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,9 +31,22 @@ namespace LPSE_UGM_Winner_Parser
             Program.pass = passBox.Text;
             Program.db = dbBox.Text;
 
-            Form1 f = new Form1();
-            this.Close();
-            f.Show();
+            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
+            {
+            try
+                {
+                    conn.Open();
+                    conn.Close();
+                    this.Hide();
+                    new Form1().ShowDialog();
+                    this.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                        
+                }
+            }
         }
     }
 }

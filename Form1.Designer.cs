@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dataLeaderboard = new System.Windows.Forms.DataGridView();
             this.topGraph = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.detailSearchGet = new System.Windows.Forms.Button();
@@ -48,6 +50,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.searchLocTab = new System.Windows.Forms.TabPage();
+            this.exportBtn = new System.Windows.Forms.Button();
             this.locGraph = new System.Windows.Forms.Button();
             this.dataLelang = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,14 +58,13 @@
             this.locGet = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.searchIDTab = new System.Windows.Forms.TabControl();
-            this.dataLeaderboard = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.searchLocTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLelang)).BeginInit();
             this.searchIDTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -75,6 +77,14 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Leaderboard";
+            // 
+            // dataLeaderboard
+            // 
+            this.dataLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataLeaderboard.Location = new System.Drawing.Point(7, 20);
+            this.dataLeaderboard.Name = "dataLeaderboard";
+            this.dataLeaderboard.Size = new System.Drawing.Size(223, 233);
+            this.dataLeaderboard.TabIndex = 23;
             // 
             // topGraph
             // 
@@ -89,12 +99,20 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disconnectToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(785, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // disconnectToolStripMenuItem
+            // 
+            this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.disconnectToolStripMenuItem.Text = "Disconnect";
+            this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -255,6 +273,7 @@
             // 
             // searchLocTab
             // 
+            this.searchLocTab.Controls.Add(this.exportBtn);
             this.searchLocTab.Controls.Add(this.locGraph);
             this.searchLocTab.Controls.Add(this.dataLelang);
             this.searchLocTab.Controls.Add(this.label3);
@@ -268,6 +287,16 @@
             this.searchLocTab.TabIndex = 0;
             this.searchLocTab.Text = "Search by Location";
             this.searchLocTab.UseVisualStyleBackColor = true;
+            // 
+            // exportBtn
+            // 
+            this.exportBtn.Location = new System.Drawing.Point(339, 26);
+            this.exportBtn.Name = "exportBtn";
+            this.exportBtn.Size = new System.Drawing.Size(75, 23);
+            this.exportBtn.TabIndex = 17;
+            this.exportBtn.Text = "Export...";
+            this.exportBtn.UseVisualStyleBackColor = true;
+            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
             // 
             // locGraph
             // 
@@ -313,6 +342,7 @@
             this.locCombo.Name = "locCombo";
             this.locCombo.Size = new System.Drawing.Size(165, 21);
             this.locCombo.TabIndex = 13;
+            this.locCombo.SelectedIndexChanged += new System.EventHandler(this.locCombo_SelectedIndexChanged);
             // 
             // locGet
             // 
@@ -343,14 +373,6 @@
             this.searchIDTab.Size = new System.Drawing.Size(518, 302);
             this.searchIDTab.TabIndex = 0;
             // 
-            // dataLeaderboard
-            // 
-            this.dataLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataLeaderboard.Location = new System.Drawing.Point(7, 20);
-            this.dataLeaderboard.Name = "dataLeaderboard";
-            this.dataLeaderboard.Size = new System.Drawing.Size(223, 233);
-            this.dataLeaderboard.TabIndex = 23;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,6 +386,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -372,7 +395,6 @@
             this.searchLocTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLelang)).EndInit();
             this.searchIDTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,6 +429,8 @@
         private System.Windows.Forms.ComboBox locCombo;
         private System.Windows.Forms.Button locGraph;
         private System.Windows.Forms.DataGridView dataLeaderboard;
+        private System.Windows.Forms.ToolStripMenuItem disconnectToolStripMenuItem;
+        private System.Windows.Forms.Button exportBtn;
     }
 }
 

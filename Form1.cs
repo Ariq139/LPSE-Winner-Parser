@@ -15,8 +15,8 @@ namespace LPSE_UGM_Winner_Parser
     {
 
         public string openedData;
-        public string srv, port, user, pass, db;
-        public string connect;
+        public string location_db = "";
+        public string connect = "server=" + Program.server + ";port=" + Program.port + ";user=" + Program.user + ";password=" + Program.pass + ";database=" + Program.db + ";";
 
         public Form1()
         {
@@ -26,13 +26,7 @@ namespace LPSE_UGM_Winner_Parser
         private void Form1_Load(object sender, EventArgs e)
         {
             locCombo.SelectedIndex = 0;
-            string srv = Program.server;
-            string port = Program.port;
-            string user = Program.user;
-            string pass = Program.pass;
-            string db = Program.db;
 
-            connect = "server=" + srv + ";port=" + port + ";user=" + user + ";password=" + pass + ";database=" + db + ";";
             getData_Leaderboard();
         }
 
@@ -112,62 +106,63 @@ namespace LPSE_UGM_Winner_Parser
         private void locGet_Click(object sender, EventArgs e)
         {
             string command = "SELECT * FROM ";
-            string location = "";
 
             if (locCombo.SelectedIndex == 0)
             {
-                location = "(SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x";
+                location_db = "(SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x";
                 openedData = "semua";
             }
             else if (locCombo.SelectedIndex == 1)
             {
-                location = "bantul";
-                openedData = location;
+                location_db = Program.db + ".bantul";
+                openedData = "bantul";
             }
             else if (locCombo.SelectedIndex == 2)
             {
-                location = "kulonprogo";
-                openedData = location;
+                location_db = Program.db + ".kulonprogo";
+                openedData = "kulonprogo";
             }
             else if (locCombo.SelectedIndex == 3)
             {
-                location = "sleman";
-                openedData = location;
+                location_db = Program.db + ".sleman";
+                openedData = "sleman";
             }
             else if (locCombo.SelectedIndex == 4)
             {
-                location = "gunungkidul";
-                openedData = location;
+                location_db = Program.db + ".gunungkidul";
+                openedData = "gunungkidul";
             }
             else if (locCombo.SelectedIndex == 5)
             {
-                location = "jogjakota";
-                openedData = location;
+                location_db = Program.db + ".jogjakota";
+                openedData = "jogjakota";
             }
             else if (locCombo.SelectedIndex == 6)
             {
-                location = "jogjaprov";
-                openedData = location;
+                location_db = Program.db + ".jogjaprov";
+                openedData = "jogjaprov";
             }
             else if (locCombo.SelectedIndex == 7)
             {
-                location = "ugm";
-                openedData = location;
+                location_db = Program.db + ".ugm";
+                openedData = "ugm";
             }
 
-            command += location;
+            command += location_db;
 
             getData_Loc(command);
+            locGraph.Enabled = true;
+            exportBtn.Enabled = true;
         }
 
         private void idGet_Click(object sender, EventArgs e)
         {
-            string command = "SELECT * FROM (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x WHERE id="+searchBox.Text;
+            string command = "SELECT * FROM (SELECT * FROM "+Program.db+ ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x WHERE id=" + searchBox.Text;
             using (MySqlConnection conn = new MySqlConnection(connect))
             {
                 MySqlCommand check = new MySqlCommand();
                 check.Connection = conn;
-                check.CommandText = "SELECT count(*) FROM (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x WHERE id=" + searchBox.Text;
+                check.CommandText = "SELECT count(*) FROM (SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x WHERE id=" + searchBox.Text;
                 try
                 {
                     conn.Open();
@@ -241,6 +236,45 @@ namespace LPSE_UGM_Winner_Parser
             }
 
             System.Diagnostics.Process.Start("http://lpse."+loc+".id/eproc4/evaluasi/"+ searchBox.Text + "/pemenang");
+        }
+
+        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new db_login().ShowDialog();
+        }
+
+        private void locCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            locGraph.Enabled = false;
+            exportBtn.Enabled = false;
+        }
+
+        private void exportBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "Comma-separated values | *.csv";
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                string tmp2 = @"'\n'";
+                char tmp3 = '"';
+                save.FileName = save.FileName.Replace(@"\", @"\\");
+                string command = "SELECT * INTO OUTFILE " + '"' + save.FileName + '"' + " FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '" + tmp3 + "' LINES TERMINATED BY " + tmp2 + " FROM " + location_db + ";";
+                using (MySqlConnection conn = new MySqlConnection(connect))
+                {
+                    MySqlCommand cmd = new MySqlCommand(command, conn);
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteReader();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    conn.Close();
+                }
+            }
         }
     }
 }
