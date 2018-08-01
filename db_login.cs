@@ -23,7 +23,12 @@ namespace LPSE_UGM_Winner_Parser
             passBox.PasswordChar = '*';
         }
 
-        private void loginBtn_Click(object sender, EventArgs e)
+        private void createBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void loginBtn_Click_1(object sender, EventArgs e)
         {
             Program.server = srvBox.Text;
             Program.port = portBox.Text;
@@ -33,7 +38,7 @@ namespace LPSE_UGM_Winner_Parser
 
             using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
             {
-            try
+                try
                 {
                     conn.Open();
                     conn.Close();
@@ -44,7 +49,7 @@ namespace LPSE_UGM_Winner_Parser
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
-                        
+
                 }
             }
         }
