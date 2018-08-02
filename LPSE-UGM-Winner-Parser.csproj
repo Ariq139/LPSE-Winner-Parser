@@ -123,6 +123,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -139,6 +140,18 @@
     </Compile>
     <Compile Include="aboutBox.Designer.cs">
       <DependentUpon>aboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="add_manual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_manual.Designer.cs">
+      <DependentUpon>add_manual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="crawler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crawler.Designer.cs">
+      <DependentUpon>crawler.cs</DependentUpon>
     </Compile>
     <Compile Include="db_login.cs">
       <SubType>Form</SubType>
@@ -162,6 +175,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="aboutBox.resx">
       <DependentUpon>aboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_manual.resx">
+      <DependentUpon>add_manual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crawler.resx">
+      <DependentUpon>crawler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="db_login.resx">
       <DependentUpon>db_login.cs</DependentUpon>
