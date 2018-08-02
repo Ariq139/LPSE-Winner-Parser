@@ -74,7 +74,7 @@ namespace LPSE_UGM_Winner_Parser
 
             using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
             {
-                try
+            try
                 {
                     conn.Open();
                     conn.Close();

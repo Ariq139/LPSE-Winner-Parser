@@ -28,11 +28,6 @@ namespace LPSE_UGM_Winner_Parser
             locCombo.SelectedIndex = 0;
 
             getData_Leaderboard();
-
-            groupBox2.Visible = false;
-            groupBox3.Visible = false;
-            groupBox4.Visible = false;
-            groupBox5.Visible = false;
         }
 
         private void getData_Loc(string command)
@@ -64,7 +59,7 @@ namespace LPSE_UGM_Winner_Parser
         private void getData_Leaderboard()
         {
             DataTable dt = new DataTable();
-            string command = "select pemenang Pemenang, count(*) Jumlah from (SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x group by pemenang order by count(*) desc limit 10";
+            string command = "select pemenang Pemenang, count(*) Jumlah from (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x group by pemenang order by count(*) desc limit 10";
             using (MySqlConnection conn = new MySqlConnection(connect))
             {
                 MySqlCommand cmd = new MySqlCommand(command, conn);
@@ -156,6 +151,7 @@ namespace LPSE_UGM_Winner_Parser
             command += location_db;
 
             getData_Loc(command);
+            locGraph.Enabled = true;
             exportBtn.Enabled = true;
         }
 
@@ -250,6 +246,7 @@ namespace LPSE_UGM_Winner_Parser
 
         private void locCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            locGraph.Enabled = false;
             exportBtn.Enabled = false;
         }
 
@@ -277,24 +274,6 @@ namespace LPSE_UGM_Winner_Parser
                     }
                     conn.Close();
                 }
-            }
-        }
-
-        private void graphOpt_Click(object sender, EventArgs e)
-        {
-            if (groupBox2.Visible)
-            {
-                groupBox2.Visible = false;
-                groupBox3.Visible = false;
-                groupBox4.Visible = false;
-                groupBox5.Visible = false;
-            }
-            else
-            {
-                groupBox2.Visible = true;
-                groupBox3.Visible = true;
-                groupBox4.Visible = true;
-                groupBox5.Visible = true;
             }
         }
     }

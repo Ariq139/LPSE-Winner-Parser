@@ -43,8 +43,8 @@ namespace LPSE_UGM_Winner_Parser
         private void getData_Detail()
         {
             DataTable dt = new DataTable();
-            string connect = "server=" + Program.server + ";port=" + Program.port + ";user=" + Program.user + ";password=" + Program.pass + ";database=" + Program.db + ";";
-            string command = "select * from (SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x where pemenang in (select pemenang from (select pemenang, count(*) from (SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x group by pemenang order by count(*) desc limit 10) x)";
+            string connect = "server=localhost;user=root;password=;database=pkl;";
+            string command = "select * from (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x where pemenang in (select pemenang from (select pemenang, count(*) from (SELECT * FROM pkl.bantul b UNION ALL SELECT * FROM pkl.gunungkidul gk UNION ALL SELECT * FROM pkl.jogjakota jk UNION ALL SELECT * FROM pkl.jogjaprov jp UNION ALL SELECT * FROM pkl.kulonprogo kp UNION ALL SELECT * FROM pkl.sleman s UNION ALL SELECT * FROM pkl.ugm u) x group by pemenang order by count(*) desc limit 10) x)";
             using (MySqlConnection conn = new MySqlConnection(connect))
             {
                 MySqlCommand cmd = new MySqlCommand(command, conn);

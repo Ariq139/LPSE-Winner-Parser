@@ -50,7 +50,7 @@
             this.dbBox.TabIndex = 32;
             this.dbBox.Text = "pkl";
             // 
-            // label5
+            // label2
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(47, 269);
@@ -101,7 +101,7 @@
             this.label3.TabIndex = 26;
             this.label3.Text = "Username";
             // 
-            // portBox
+            // passBox
             // 
             this.portBox.Location = new System.Drawing.Point(50, 118);
             this.portBox.Name = "portBox";
@@ -109,7 +109,7 @@
             this.portBox.TabIndex = 25;
             this.portBox.Text = "3306";
             // 
-            // label2
+            // label4
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(47, 102);
@@ -118,7 +118,7 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "Port";
             // 
-            // srvBox
+            // loginBtn
             // 
             this.srvBox.Location = new System.Drawing.Point(50, 65);
             this.srvBox.Name = "srvBox";
@@ -126,7 +126,7 @@
             this.srvBox.TabIndex = 23;
             this.srvBox.Text = "localhost";
             // 
-            // label1
+            // dbBox
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(47, 49);
