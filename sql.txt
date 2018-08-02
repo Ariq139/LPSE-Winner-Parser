@@ -32,4 +32,7 @@ select * from
  
  
  //export to csv
-SELECT * INTO OUTFILE "D:\\result.csv" FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM pkl.ugm 
+SELECT id,tipe,pemenang INTO OUTFILE "D:\\result.csv" FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n' FROM pkl.ugm 
+
+//graph java arguments
+//source0, destination1, colorMin2, colorMax3, rankSizeMin4, rankSizeMax5, labelSizeMin6, labelSizeMax7, seconds8, repulsion9
