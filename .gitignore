@@ -332,4 +332,6 @@ ASALocalRun/
 # Misc.
 client_secret.json
 credentials.json
+Resources/
+lib/
 gephi-toolkit-0.9.2-all.jar
