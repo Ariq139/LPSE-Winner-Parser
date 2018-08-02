@@ -23,11 +23,6 @@ namespace LPSE_UGM_Winner_Parser
             passBox.PasswordChar = '*';
         }
 
-        private void createBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loginBtn_Click_1(object sender, EventArgs e)
         {
             Program.server = srvBox.Text;
@@ -50,6 +45,46 @@ namespace LPSE_UGM_Winner_Parser
                 {
                     MessageBox.Show(ex.Message);
 
+                }
+            }
+        }
+
+        private void createBtn_Click_1(object sender, EventArgs e)
+        {
+            Program.server = srvBox.Text;
+            Program.port = portBox.Text;
+            Program.user = userBox.Text;
+            Program.pass = passBox.Text;
+            Program.db = dbBox.Text;
+
+            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";"))
+            {
+                try
+                {
+                    string command = "CREATE DATABASE IF NOT EXISTS " + dbBox.Text + ";";
+                    MySqlCommand cmd = new MySqlCommand(command, conn);
+                    conn.Open();
+                    conn.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Close();
+                    this.Hide();
+                    new Form1().ShowDialog();
+                    this.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
