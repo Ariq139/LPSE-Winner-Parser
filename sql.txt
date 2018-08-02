@@ -36,3 +36,7 @@ SELECT id,tipe,pemenang INTO OUTFILE "D:\\result.csv" FIELDS TERMINATED BY ';' O
 
 //graph java arguments
 //source0, destination1, colorMin2, colorMax3, rankSizeMin4, rankSizeMax5, labelSizeMin6, labelSizeMax7, seconds8, repulsion9
+
+
+//INSERT INTO `lpse` (`id`, `wilayah`, `link`) VALUES ('123', 'b', 'c');
+//ALTER TABLE `lelang` ADD PRIMARY KEY(`id`)
