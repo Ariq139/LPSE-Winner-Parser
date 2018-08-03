@@ -3,10 +3,7 @@ from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys, ssl
 import mysql_write
 
-loc = ""
-loc_localize = ""
-
-def getData(auct_id, loc_):
+def getData(location, start_point, end_point, timeout, retry_limit):
     global loc
     global loc_localize
     
@@ -62,8 +59,24 @@ def getData(auct_id, loc_):
         except IndexError:
             print("Pemenang tidak ditemukan")
 
-if __name__ == "__main__":
-    auct_id = str(sys.argv[1])
-    loc_ = str(sys.argv[2])
+def test(location, start_point, end_point, timeout, retry_limit):
+    print(location)
+    print(start_point)
+    print(end_point)
+    print(timeout)
+    print(retry_limit)
+    #input("PRESS ENTER TO CONTINUE.")
 
-    getData(auct_id, loc_)
+    #cursor1.execute("select djname from jerryins_djleaderboard.leaderboard where djname = %s", dj)
+    #result = cursor1.fetchall()
+    #for row in result:
+        #print row[0]
+
+if __name__ == "__main__":
+    location = str(sys.argv[1])
+    start_point = str(sys.argv[2])
+    end_point = str(sys.argv[3])
+    timeout = int(sys.argv[4])
+    retry_limit = int(sys.argv[5])
+
+    test(location, start_point, end_point, timeout, retry_limit)

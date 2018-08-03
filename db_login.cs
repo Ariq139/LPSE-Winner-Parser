@@ -23,32 +23,7 @@ namespace LPSE_UGM_Winner_Parser
             passBox.PasswordChar = '*';
         }
 
-        private void loginBtn_Click_1(object sender, EventArgs e)
-        {
-            Program.server = srvBox.Text;
-            Program.port = portBox.Text;
-            Program.user = userBox.Text;
-            Program.pass = passBox.Text;
-            Program.db = dbBox.Text;
-
-            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
-            {
-                try
-                {
-                    conn.Open();
-                    conn.Close();
-                    this.Hide();
-                    new Form1().ShowDialog();
-                    this.Close();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
-
-                }
-            }
-        }
-
+        //Create new db / first run
         private void createBtn_Click_1(object sender, EventArgs e)
         {
             Program.server = srvBox.Text;
@@ -85,6 +60,43 @@ namespace LPSE_UGM_Winner_Parser
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        //Reset value
+        private void button1_Click(object sender, EventArgs e)
+        {
+            srvBox.Text = "localhost";
+            portBox.Text = "3306";
+            userBox.Text = "root";
+            passBox.Text = "";
+            dbBox.Text = "pkl_v2";
+        }
+
+        //login to existing db
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            Program.server = srvBox.Text;
+            Program.port = portBox.Text;
+            Program.user = userBox.Text;
+            Program.pass = passBox.Text;
+            Program.db = dbBox.Text;
+
+            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
+            {
+                try
+                {
+                    conn.Open();
+                    conn.Close();
+                    this.Hide();
+                    new Form1().ShowDialog();
+                    this.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+
                 }
             }
         }

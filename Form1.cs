@@ -27,7 +27,7 @@ namespace LPSE_UGM_Winner_Parser
         {
             locCombo.SelectedIndex = 0;
 
-            getData_Leaderboard();
+            //getData_Leaderboard();
 
             groupBox2.Visible = false;
             groupBox3.Visible = false;
@@ -44,20 +44,20 @@ namespace LPSE_UGM_Winner_Parser
                 try
                 {
                     conn.Open();
+                    MySqlDataReader read = cmd.ExecuteReader();
+                    dt.Load(read);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        dataLelang.DataSource = dt;
+                    }
+
+                    conn.Close();
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                MySqlDataReader read = cmd.ExecuteReader();
-                dt.Load(read);
-
-                if (dt.Rows.Count > 0)
-                {
-                    dataLelang.DataSource = dt;
-                }
-
-                conn.Close();
             }
         }
 
@@ -71,20 +71,20 @@ namespace LPSE_UGM_Winner_Parser
                 try
                 {
                     conn.Open();
+                    MySqlDataReader read = cmd.ExecuteReader();
+                    dt.Load(read);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        dataLeaderboard.DataSource = dt;
+                    }
+
+                    conn.Close();
                 }
                 catch (MySqlException ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                MySqlDataReader read = cmd.ExecuteReader();
-                dt.Load(read);
-
-                if (dt.Rows.Count > 0)
-                {
-                    dataLeaderboard.DataSource = dt;
-                }
-
-                conn.Close();
             }
         }
 
@@ -296,6 +296,11 @@ namespace LPSE_UGM_Winner_Parser
                 groupBox4.Visible = true;
                 groupBox5.Visible = true;
             }
+        }
+
+        private void crawlerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new crawler().ShowDialog();
         }
     }
 }

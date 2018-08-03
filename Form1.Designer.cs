@@ -87,9 +87,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.browseFileBtn = new System.Windows.Forms.Button();
-            this.fileLocBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -165,7 +165,7 @@
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.addToolStripMenuItem.Text = "Add Manually";
             // 
             // crawlerToolStripMenuItem
@@ -173,11 +173,12 @@
             this.crawlerToolStripMenuItem.Name = "crawlerToolStripMenuItem";
             this.crawlerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.crawlerToolStripMenuItem.Text = "Crawler";
+            this.crawlerToolStripMenuItem.Click += new System.EventHandler(this.crawlerToolStripMenuItem_Click);
             // 
             // disconnectFromDatabaseToolStripMenuItem
             // 
             this.disconnectFromDatabaseToolStripMenuItem.Name = "disconnectFromDatabaseToolStripMenuItem";
-            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.disconnectFromDatabaseToolStripMenuItem.Text = "Disconnect";
             // 
             // helpToolStripMenuItem
@@ -431,6 +432,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -440,8 +443,6 @@
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.browseFileBtn);
-            this.tabPage1.Controls.Add(this.fileLocBox);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -457,7 +458,7 @@
             this.groupBox5.Controls.Add(this.textBox9);
             this.groupBox5.Controls.Add(this.label17);
             this.groupBox5.Controls.Add(this.label18);
-            this.groupBox5.Location = new System.Drawing.Point(396, 156);
+            this.groupBox5.Location = new System.Drawing.Point(395, 165);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(138, 146);
             this.groupBox5.TabIndex = 14;
@@ -470,6 +471,7 @@
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(126, 20);
             this.textBox8.TabIndex = 7;
+            this.textBox8.Text = "2000.";
             // 
             // textBox9
             // 
@@ -477,6 +479,7 @@
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(126, 20);
             this.textBox9.TabIndex = 6;
+            this.textBox9.Text = "120";
             // 
             // label17
             // 
@@ -502,7 +505,7 @@
             this.groupBox4.Controls.Add(this.textBox7);
             this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Location = new System.Drawing.Point(267, 156);
+            this.groupBox4.Location = new System.Drawing.Point(266, 165);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(123, 146);
             this.groupBox4.TabIndex = 13;
@@ -515,6 +518,7 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(111, 20);
             this.textBox6.TabIndex = 7;
+            this.textBox6.Text = "3";
             // 
             // textBox7
             // 
@@ -522,6 +526,7 @@
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(111, 20);
             this.textBox7.TabIndex = 6;
+            this.textBox7.Text = "0.6";
             // 
             // label14
             // 
@@ -547,7 +552,7 @@
             this.groupBox3.Controls.Add(this.textBox5);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Location = new System.Drawing.Point(138, 156);
+            this.groupBox3.Location = new System.Drawing.Point(137, 165);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(123, 146);
             this.groupBox3.TabIndex = 12;
@@ -560,6 +565,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(111, 20);
             this.textBox4.TabIndex = 7;
+            this.textBox4.Text = "3";
             // 
             // textBox5
             // 
@@ -567,6 +573,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(111, 20);
             this.textBox5.TabIndex = 6;
+            this.textBox5.Text = "0.8";
             // 
             // label12
             // 
@@ -592,7 +599,7 @@
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Location = new System.Drawing.Point(9, 156);
+            this.groupBox2.Location = new System.Drawing.Point(8, 165);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(123, 146);
             this.groupBox2.TabIndex = 11;
@@ -605,6 +612,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(111, 20);
             this.textBox3.TabIndex = 3;
+            this.textBox3.Text = "0xAAAAFF";
             // 
             // textBox2
             // 
@@ -612,6 +620,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(111, 20);
             this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "0xFFC0D9";
             // 
             // label11
             // 
@@ -633,9 +642,9 @@
             // 
             // graphOpt
             // 
-            this.graphOpt.Location = new System.Drawing.Point(9, 106);
+            this.graphOpt.Location = new System.Drawing.Point(10, 119);
             this.graphOpt.Name = "graphOpt";
-            this.graphOpt.Size = new System.Drawing.Size(75, 30);
+            this.graphOpt.Size = new System.Drawing.Size(75, 22);
             this.graphOpt.TabIndex = 7;
             this.graphOpt.Text = "Options";
             this.graphOpt.UseVisualStyleBackColor = true;
@@ -643,7 +652,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(204, 106);
+            this.button2.Location = new System.Drawing.Point(424, 115);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(110, 30);
             this.button2.TabIndex = 6;
@@ -652,9 +661,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(459, 77);
+            this.button1.Location = new System.Drawing.Point(424, 77);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(110, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = " Browse";
             this.button1.UseVisualStyleBackColor = true;
@@ -663,7 +672,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(9, 79);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(444, 20);
+            this.textBox1.Size = new System.Drawing.Size(409, 20);
             this.textBox1.TabIndex = 4;
             // 
             // label4
@@ -671,34 +680,45 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 62);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "File Destination";
-            // 
-            // browseFileBtn
-            // 
-            this.browseFileBtn.Location = new System.Drawing.Point(459, 27);
-            this.browseFileBtn.Name = "browseFileBtn";
-            this.browseFileBtn.Size = new System.Drawing.Size(75, 23);
-            this.browseFileBtn.TabIndex = 2;
-            this.browseFileBtn.Text = " Browse";
-            this.browseFileBtn.UseVisualStyleBackColor = true;
-            // 
-            // fileLocBox
-            // 
-            this.fileLocBox.Location = new System.Drawing.Point(9, 29);
-            this.fileLocBox.Name = "fileLocBox";
-            this.fileLocBox.Size = new System.Drawing.Size(444, 20);
-            this.fileLocBox.TabIndex = 1;
+            this.label4.Text = "Graph Destination";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "File Source";
+            this.label2.Text = "Wilayah";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Semua",
+            "Bantul",
+            "Kulonprogo",
+            "Sleman",
+            "Gunungkidul",
+            "Kota Yogyakarta",
+            "D.I.Yogyakarta",
+            "Universitas Gadjah Mada"});
+            this.comboBox1.Location = new System.Drawing.Point(9, 28);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(264, 21);
+            this.comboBox1.TabIndex = 15;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(91, 119);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(126, 22);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Reset to default";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -773,8 +793,6 @@
         private System.Windows.Forms.ToolStripMenuItem crawlerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disconnectFromDatabaseToolStripMenuItem;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button browseFileBtn;
-        private System.Windows.Forms.TextBox fileLocBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
@@ -800,6 +818,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button graphOpt;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button3;
     }
 }
 

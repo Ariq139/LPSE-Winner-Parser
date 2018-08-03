@@ -40,20 +40,21 @@
             this.srvBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.createBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dbBox
             // 
-            this.dbBox.Location = new System.Drawing.Point(15, 245);
+            this.dbBox.Location = new System.Drawing.Point(15, 192);
             this.dbBox.Name = "dbBox";
             this.dbBox.Size = new System.Drawing.Size(181, 20);
             this.dbBox.TabIndex = 32;
-            this.dbBox.Text = "pkl";
+            this.dbBox.Text = "pkl_v2";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 229);
+            this.label5.Location = new System.Drawing.Point(12, 176);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 31;
@@ -61,16 +62,17 @@
             // 
             // loginBtn
             // 
-            this.loginBtn.Location = new System.Drawing.Point(15, 292);
+            this.loginBtn.Location = new System.Drawing.Point(15, 308);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(181, 36);
             this.loginBtn.TabIndex = 30;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // passBox
             // 
-            this.passBox.Location = new System.Drawing.Point(15, 189);
+            this.passBox.Location = new System.Drawing.Point(15, 136);
             this.passBox.Name = "passBox";
             this.passBox.Size = new System.Drawing.Size(181, 20);
             this.passBox.TabIndex = 29;
@@ -78,7 +80,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 173);
+            this.label4.Location = new System.Drawing.Point(12, 120);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 28;
@@ -86,7 +88,7 @@
             // 
             // userBox
             // 
-            this.userBox.Location = new System.Drawing.Point(15, 132);
+            this.userBox.Location = new System.Drawing.Point(15, 79);
             this.userBox.Name = "userBox";
             this.userBox.Size = new System.Drawing.Size(181, 20);
             this.userBox.TabIndex = 27;
@@ -95,7 +97,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 116);
+            this.label3.Location = new System.Drawing.Point(12, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 26;
@@ -103,16 +105,16 @@
             // 
             // portBox
             // 
-            this.portBox.Location = new System.Drawing.Point(15, 78);
+            this.portBox.Location = new System.Drawing.Point(150, 25);
             this.portBox.Name = "portBox";
-            this.portBox.Size = new System.Drawing.Size(181, 20);
+            this.portBox.Size = new System.Drawing.Size(52, 20);
             this.portBox.TabIndex = 25;
             this.portBox.Text = "3306";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 62);
+            this.label2.Location = new System.Drawing.Point(147, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 24;
@@ -122,7 +124,7 @@
             // 
             this.srvBox.Location = new System.Drawing.Point(15, 25);
             this.srvBox.Name = "srvBox";
-            this.srvBox.Size = new System.Drawing.Size(181, 20);
+            this.srvBox.Size = new System.Drawing.Size(129, 20);
             this.srvBox.TabIndex = 23;
             this.srvBox.Text = "localhost";
             // 
@@ -145,11 +147,22 @@
             this.createBtn.UseVisualStyleBackColor = true;
             this.createBtn.Click += new System.EventHandler(this.createBtn_Click_1);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(15, 232);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(181, 23);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "Reset to default";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // db_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(214, 398);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.createBtn);
             this.Controls.Add(this.dbBox);
             this.Controls.Add(this.label5);
@@ -184,5 +197,6 @@
         private System.Windows.Forms.TextBox srvBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button createBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
