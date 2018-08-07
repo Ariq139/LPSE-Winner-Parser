@@ -2,21 +2,12 @@
 import mysql.connector, sys
 
 def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
-    cnx = mysql.connector.connect(user=usr, password=pw, host=srv)
+    cnx = mysql.connector.connect(user=usr, password=pw, host=srv, database=db, port=prt)
     cursor = cnx.cursor()
     
-    db_create = ("CREATE DATABASE IF NOT EXISTS "+db);
+    #table_create = ("CREATE TABLE IF NOT EXISTS `lelang` (`ID` varchar(8), `Nama Lelang` varchar(255), `Tipe` varchar(64), `Instansi` varchar(64), `Pemenang` varchar(255))")
     
-    cursor.execute(db_create, "")
-    
-    cnx.commit()
-    
-    cnx = mysql.connector.connect(user=usr, password=pw, host=srv, database=db)
-    cursor = cnx.cursor()
-    
-    table_create = ("CREATE TABLE IF NOT EXISTS `"+db+"`.`lelang` (`ID` varchar(8), `Nama Lelang` varchar(255), `Tipe` varchar(64), `Instansi` varchar(64), `Pemenang` varchar(255))")
-    
-    cursor.execute(table_create, "")
+    #cursor.execute(table_create, "")
     
     #ALTER TABLE `lelang` ADD PRIMARY KEY(`id`)
     
