@@ -3,24 +3,32 @@ from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys, ssl
 import mysql_write
 
-def getData(location, start_point, end_point, retry_limit, link, code):
-    for i in range(start_point, end_point):
-        for j in range(retry_limit):
+def getData_Pengumuman(start_point, end_point, retry_limit, link, lpse_code):
+    for i in range(start_point, end_point+1): #mulai dari start sampai end, dari UI
+        for j in range(0, retry_limit): #
             try:
                 context = ssl._create_unverified_context()
-                html = urllib.request.urlopen(link + "/eproc4/evaluasi/" + str(i) + str(code) + "/pemenang", context=context)
+                html = urllib.request.urlopen(link + "/eproc4/lelang/" + str(i) + str(lpse_code) + "/pengumumanlelang", context=context)
                 
                 soup = BS(html, 'html.parser')
+                print("get link done")
+                
+                break
         
             except urllib.error.HTTPError as e:
                 print('Error: ', e.code)
-                #break #automatically end the for loop
                 
             except urllib.error.URLError as e:
                 print('Error: ', e.reason)
-                
-            #print('\n')
-
+        
+        for j in range(0, retry_limit):
+            for tmp in range(0, len(soup.find_all('th'))):
+                if soup.find_all('th')[tmp] == "Kode Lelang":
+                    print(soup.find_all('td')[tmp])
+                    break
+            
+            break
+        break
 def test(location, start_point, end_point, timeout, retry_limit):
     print(location)
     print(start_point)
@@ -35,10 +43,10 @@ def test(location, start_point, end_point, timeout, retry_limit):
         #print row[0]
 
 if __name__ == "__main__":
-    location = str(sys.argv[1])
-    start_point = str(sys.argv[2])
-    end_point = str(sys.argv[3])
-    timeout = int(sys.argv[4])
-    retry_limit = int(sys.argv[5])
+    start_point = int(sys.argv[1])
+    end_point = int(sys.argv[2])
+    retry_limit = int(sys.argv[3])
+    link = str(sys.argv[4])
+    lpse_code = str(sys.argv[5])
 
-    test(location, start_point, end_point, retry_limit, link, lpse_code)
+    getData_Pengumuman(start_point, end_point, retry_limit, link, lpse_code)
