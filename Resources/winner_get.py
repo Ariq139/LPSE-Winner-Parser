@@ -95,6 +95,7 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
                 
         for tmp in range(0, len(soup.find_all('th'))):
             if soup.find_all('th')[tmp].get_text() == "Tanggal Pembuatan":
+                tgl_buat = soup.find_all('td')[tmp].get_text()
                 break
                 
         for tmp in range(0, len(soup.find_all('th'))):
@@ -137,7 +138,7 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
                 kualifikasi = soup.find_all('td')[tmp-1].get_text()
                 break
                 
-        tmp1, tmp2 = soup.find_all('td')[len(soup.find_all('td'))-1].get_text().split() #hapus kata peserta, ambil angkanya
+        tmp1, tmp2 = soup.find_all('td')[len(soup.find_all('td'))-1].get_text().split() #hapus kata peserta, ambil angkanya, selalu paling bawah kyknya
         jml_peserta = tmp1
         
         print(kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, kualifikasi, jml_peserta) #ganti fungsi biar masuk ke tabel
