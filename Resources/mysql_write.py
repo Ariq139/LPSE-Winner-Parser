@@ -1,36 +1,101 @@
 #!/usr/bin/python3.7
 import mysql.connector, sys
 
-def writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_):
-    cnx = mysql.connector.connect(user=usr, password=pw, host=srv, database=db, port=prt)
-    cursor = cnx.cursor()
+def DBConnect(server, port, db, user, pw):
+    cnx = mysql.connector.connect(user=user, password=pw, host=server, database=db, port=port)
     
-    #table_create = ("CREATE TABLE IF NOT EXISTS `lelang` (`ID` varchar(8), `Nama Lelang` varchar(255), `Tipe` varchar(64), `Instansi` varchar(64), `Pemenang` varchar(255))")
+    return cnx
+
+def gatherData(cnx, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail):
     
-    #cursor.execute(table_create, "")
     
-    #ALTER TABLE `lelang` ADD PRIMARY KEY(`id`)
-    
-    add_entry = ("INSERT INTO "+loc_+" VALUES (%s, %s, %s, %s, %s)")
-    entry_data = (id, name, type, instance, winner)
-    
-    cursor.execute(add_entry, entry_data)
-    
-    cnx.commit()
 
     cursor.close()
     cnx.close()
 
-if __name__ == "__main__":
-    usr = str(sys.argv[1])
-    pw = str(sys.argv[2])
-    srv = str(sys.argv[3])
-    db = str(sys.argv[4])
-    id = str(sys.argv[5])
-    name = str(sys.argv[6])
-    type = str(sys.argv[7])
-    instance = str(sys.argv[8])
-    winner = str(sys.argv[9])
-    loc_ = str(sys.argv[10])
     
-    writeData(usr, pw, srv, db, id, name, type, instance, winner, loc_)
+def insertData_Pengumuman(cnx, result_pengumuman):
+    cursor = cnx.cursor()
+    
+    add_entry = ("INSERT INTO pengumuman VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+    entry_data = (result_pengumuman[0], result_pengumuman[1], result_pengumuman[2], result_pengumuman[3], result_pengumuman[4], result_pengumuman[5], result_pengumuman[6], result_pengumuman[7], result_pengumuman[8], result_pengumuman[9], result_pengumuman[10], result_pengumuman[11]) #kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, kualifikasi, jml_peserta
+    
+    try:
+        cursor.execute(add_entry, entry_data)
+    
+        cnx.commit()
+        
+def insertData_Peserta(cnx, result_peserta):
+    cursor = cnx.cursor()
+    
+    for i in range(len(result_peserta)):
+        add_entry = ("INSERT INTO peserta VALUES (%s, %s, %s, %s, %s)")
+        entry_data = (result_peserta[i][0], result_peserta[i][1], result_peserta[i][2], result_peserta[i][3], result_peserta[i][4]) #kode_lelang, nama, npwp, penawaran, terkoreksi
+    
+        try:
+            cursor.execute(add_entry, entry_data)
+    
+            cnx.commit()
+    
+def insertData_Tahap(cnx, result_tahap):
+    cursor = cnx.cursor()
+    
+    for i in range(len(result_tahap)):
+        add_entry = ("INSERT INTO tahap VALUES (%s, %s, %s, %s)")
+        entry_data = (result_tahap[i][0], result_tahap[i][1], result_tahap[i][2], result_tahap[i][3]) #kode_lelang, tahap, mulai, sampai
+    
+        try:
+            cursor.execute(add_entry, entry_data)
+    
+            cnx.commit()
+            
+def insertData_Evaluasi(cnx, result_evaluasi):
+    cursor = cnx.cursor()
+    
+    for i in range(len(result_tahap)):
+        add_entry = ("INSERT INTO evaluasi VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        entry_data = (result_evaluasi[i][0], result_evaluasi[i][1], result_evaluasi[i][2], result_evaluasi[i][3], result_evaluasi[i][4], result_evaluasi[i][5], result_evaluasi[i][6], result_evaluasi[i][7], result_evaluasi[i][8], result_evaluasi[i][9], result_evaluasi[i][10]) #kode_lelang, npwp, k, a, t, penawaran, terkoreksi, h, p, pk, alasan
+    
+        try:
+            cursor.execute(add_entry, entry_data)
+    
+            cnx.commit()
+ 
+def insertData_Pemenang(cnx, result_pemenang):
+    cursor = cnx.cursor()
+    
+    add_entry = ("INSERT INTO pemenang VALUES (%s, %s)")
+    entry_data = (result_pemenang[0], result_pemenang[1]) #kode_lelang, npwp
+    
+    try:
+        cursor.execute(add_entry, entry_data)
+    
+        cnx.commit()
+        
+def insertData_PemenangDetail(cnx, result_pemenangdetail):
+    cursor = cnx.cursor()
+    
+    add_entry = ("INSERT INTO pemenang_detail VALUES (%s, %s, %s)")
+    entry_data = (result_pemenangdetail[0], result_pemenangdetail[1], result_pemenangdetail[2]) #npwp, nama, alamat
+    
+    try:
+        cursor.execute(add_entry, entry_data)
+    
+        cnx.commit()
+ 
+if __name__ == "__main__":
+    server = str(sys.argv[1])
+    port = str(sys.argv[2])
+    db = str(sys.argv[3])
+    user = str(sys.argv[4])
+    pw = str(sys.argv[5])
+    
+    result_pengumuman = sys.argv[6]
+    result_peserta = sys.argv[7]
+    result_tahap = sys.argv[8]
+    result_evaluasi = sys.argv[9]
+    result_pemenang = sys.argv[10]
+    result_pemenangdetail = sys.argv[11]
+    
+    cnx = DBConnect(server, port, db, user, pw)
+    gatherData(cnx, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail)
