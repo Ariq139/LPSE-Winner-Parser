@@ -114,7 +114,7 @@ namespace LPSE_UGM_Winner_Parser
 
             if (locCombo.SelectedIndex == 0)
             {
-                location_db = "(SELECT * FROM " + Program.db + ".bantul b UNION ALL SELECT * FROM " + Program.db + ".gunungkidul gk UNION ALL SELECT * FROM " + Program.db + ".jogjakota jk UNION ALL SELECT * FROM " + Program.db + ".jogjaprov jp UNION ALL SELECT * FROM " + Program.db + ".kulonprogo kp UNION ALL SELECT * FROM " + Program.db + ".sleman s UNION ALL SELECT * FROM " + Program.db + ".ugm u) x";
+                location_db = "lelang";
                 openedData = "semua";
             }
             else if (locCombo.SelectedIndex == 1)

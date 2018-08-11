@@ -35,11 +35,8 @@
             this.locCombo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.startScript = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.retryBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.timeoutBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -62,7 +59,7 @@
             // 
             // endBox
             // 
-            this.endBox.Location = new System.Drawing.Point(109, 81);
+            this.endBox.Location = new System.Drawing.Point(116, 81);
             this.endBox.Name = "endBox";
             this.endBox.Size = new System.Drawing.Size(91, 20);
             this.endBox.TabIndex = 3;
@@ -71,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(106, 64);
+            this.label2.Location = new System.Drawing.Point(113, 64);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 2;
@@ -91,7 +88,7 @@
             "LPSE Universitas Gadjah Mada"});
             this.locCombo.Location = new System.Drawing.Point(12, 28);
             this.locCombo.Name = "locCombo";
-            this.locCombo.Size = new System.Drawing.Size(188, 21);
+            this.locCombo.Size = new System.Drawing.Size(195, 21);
             this.locCombo.TabIndex = 14;
             // 
             // label3
@@ -107,60 +104,34 @@
             // 
             this.startScript.Location = new System.Drawing.Point(102, 244);
             this.startScript.Name = "startScript";
-            this.startScript.Size = new System.Drawing.Size(98, 37);
+            this.startScript.Size = new System.Drawing.Size(105, 37);
             this.startScript.TabIndex = 16;
             this.startScript.Text = "Start";
             this.startScript.UseVisualStyleBackColor = true;
             this.startScript.Click += new System.EventHandler(this.startScript_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(206, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 268);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Contoh";
-            // 
             // retryBox
             // 
-            this.retryBox.Location = new System.Drawing.Point(109, 136);
+            this.retryBox.Location = new System.Drawing.Point(12, 138);
             this.retryBox.Name = "retryBox";
-            this.retryBox.Size = new System.Drawing.Size(91, 20);
+            this.retryBox.Size = new System.Drawing.Size(82, 20);
             this.retryBox.TabIndex = 21;
             this.retryBox.Text = "3";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(106, 119);
+            this.label4.Location = new System.Drawing.Point(9, 121);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 20;
             this.label4.Text = "Max. Retry";
             // 
-            // timeoutBox
-            // 
-            this.timeoutBox.Location = new System.Drawing.Point(12, 136);
-            this.timeoutBox.Name = "timeoutBox";
-            this.timeoutBox.Size = new System.Drawing.Size(82, 20);
-            this.timeoutBox.TabIndex = 19;
-            this.timeoutBox.Text = "60";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 119);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Timeout (sec)";
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(13, 175);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(187, 23);
+            this.button2.Size = new System.Drawing.Size(194, 23);
             this.button2.TabIndex = 22;
             this.button2.Text = "Reset to default";
             this.button2.UseVisualStyleBackColor = true;
@@ -170,13 +141,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 293);
+            this.ClientSize = new System.Drawing.Size(219, 293);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.retryBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.timeoutBox);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.startScript);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.locCombo);
@@ -186,6 +154,7 @@
             this.Controls.Add(this.label1);
             this.Name = "crawler";
             this.Text = "crawler";
+            this.Load += new System.EventHandler(this.crawler_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,11 +169,8 @@
         private System.Windows.Forms.ComboBox locCombo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button startScript;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox retryBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox timeoutBox;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
     }
 }
