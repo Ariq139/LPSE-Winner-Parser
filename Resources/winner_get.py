@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 from bs4 import BeautifulSoup as BS
 import urllib.request, urllib.error, sys, ssl
-#import mysql_write
+import mysql_write
 
 def linkConnect_Pengumuman(link, kode_lelang):
     context = ssl._create_unverified_context()
@@ -69,17 +69,23 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
     hps = ""
     jml_peserta = ""
     
+    result_pengumuman = None
+    
     #ambil "koneksi"
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Pengumuman(link, kode_lelang)
                 
             linkGet = True
-            print("Connection to Pengumuman established.")
+            print("Connection to Pengumuman established. (", kode_lelang, ")")
             break
         
         except urllib.error.HTTPError as e:
             print('Error: ', e.code)
+            
+            if e.code == 500 or e.code == 403 or e.code == 404:
+                result_pengumuman = "no data"
+                break
                 
         except urllib.error.URLError as e:
             print('Error: ', e.reason)
@@ -125,26 +131,30 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
                 
         for tmp in range(0, len(soup.find_all('th'))):
             if soup.find_all('th')[tmp].get_text() == "Nilai Pagu Paket":
-                pagu = soup.find_all('td')[tmp].get_text()[2:] #hapus Rp
+                pagu = soup.find_all('td')[tmp].get_text()
                 break
                     
         for tmp in range(0, len(soup.find_all('th'))):
             if soup.find_all('th')[tmp].get_text() == "Nilai HPS Paket":
-                hps = soup.find_all('td')[tmp].get_text()[2:] #hapus Rp
+                hps = soup.find_all('td')[tmp].get_text()
                 break
                 
-        for tmp in range(0, len(soup.find_all('th'))): #USE WITH CAUTION
-            if soup.find_all('th')[tmp].get_text() == "Kualifikasi Usaha":
-                kualifikasi = soup.find_all('td')[tmp-1].get_text()
-                break
+        #for tmp in range(0, len(soup.find_all('th'))): #USE WITH CAUTION (inkonsisten?)
+            #if soup.find_all('th')[tmp].get_text() == "Kualifikasi Usaha":
+                #kualifikasi = soup.find_all('td')[tmp-1].get_text()
+                #break
                 
         tmp1, tmp2 = soup.find_all('td')[len(soup.find_all('td'))-1].get_text().split() #hapus kata peserta, ambil angkanya, selalu paling bawah kyknya
         jml_peserta = tmp1
         
-        result_pengumuman = [kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, kualifikasi, jml_peserta]
+        result_pengumuman = [kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, jml_peserta]
         
+        print("Data from Pengumuman retrieved. (", kode_lelang, ")")
         return result_pengumuman
-
+        
+    else:
+        return result_pengumuman
+    
 def getData_Peserta(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
@@ -154,6 +164,7 @@ def getData_Peserta(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Peserta(link, kode_lelang)
+            print("Connection to Peserta established. (", kode_lelang, ")")
                 
             linkGet = True
             break
@@ -169,23 +180,20 @@ def getData_Peserta(retry_limit, link, kode_lelang):
         while i < len(soup.find_all('td')):
             nama = soup.find_all('td')[i].get_text()
             npwp = soup.find_all('td')[i+1].get_text()
-            
-            if soup.find_all('td')[i+2].get_text().startswith("Rp"):
-                penawaran = soup.find_all('td')[i+2].get_text()
-            else:
-                penawaran = ""
-            
-            if soup.find_all('td')[i+3].get_text().startswith("Rp"):
-                terkoreksi = soup.find_all('td')[i+3].get_text()
-            else:
-                terkoreksi = ""
+            penawaran = soup.find_all('td')[i+2].get_text()
+            terkoreksi = soup.find_all('td')[i+3].get_text()
             
             result_peserta.append([kode_lelang, nama, npwp, penawaran, terkoreksi]) #ganti fungsi biar masuk ke tabel
             
             i += 5
-            
-    return result_peserta
          
+        print("Data from Peserta retrieved. (", kode_lelang, ")")        
+        return result_peserta
+    
+    else:
+        return result_peserta
+
+"""
 def getData_Evaluasi(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
@@ -195,6 +203,7 @@ def getData_Evaluasi(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Evaluasi(link, kode_lelang)
+            print("Connection to Evaluasi established. (", kode_lelang, ")")
                 
             linkGet = True
             break
@@ -206,53 +215,95 @@ def getData_Evaluasi(retry_limit, link, kode_lelang):
             print('Error: ', e.reason)
                 
     if linkGet:
-        i = 1
+        i = 0
+        header_limit = 20
+        
         while i < len(soup.find_all('td')):
-            tmp1, tmp2 = soup.find_all('td')[i].get_text().split(' - ') #pisah nama perusahaan dan npwp
+            try:
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "Alasan":   
+                        alasan = soup.find_all('td')[i+tmp-2].get_text()
+                        header_limit = tmp
+                        break
+                        
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "Nama Peserta":    
+                        npwp = soup.find_all('td')[i+tmp-2].get_text()[(len(soup.find_all('td')[i].get_text())-20):] #pisah nama perusahaan dan npwp, ambil npwp
+                        break
             
-            npwp = tmp2
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "K":
+                        if soup.find_all('td')[i+tmp-1].contents != []:
+                            k = 1
+                            break
+                        else:
+                            k = 0
             
-            if soup.find_all('td')[i+1].contents != []:
-                k = True
-            else:
-                k = False
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "A":
+                        if soup.find_all('td')[i+tmp].contents != []:
+                            a = 1
+                            break
+                        else:
+                            a = 0
             
-            if soup.find_all('td')[i+2].contents != []:
-                a = True
-            else:
-                a = False
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "T":
+                        if soup.find_all('td')[i+tmp].contents != []:
+                            t = 1
+                            break
+                        else:
+                            t = 0
+                            
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "Penawaran":
+                        penawaran = soup.find_all('td')[i+tmp-1].get_text()
+                        break
+                    
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "Penawaran Terkoreksi":       
+                        terkoreksi = soup.find_all('td')[i+tmp-1].get_text()
+                        break
             
-            if soup.find_all('td')[i+3].contents != []:
-                t = True
-            else:
-                t = False
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "H":   
+                        if soup.find_all('td')[i+tmp].contents != []:
+                            h = 1
+                            break
+                        else:
+                            h = 0
             
-            penawaran = soup.find_all('td')[i+4].get_text()[2:]
-            terkoreksi = soup.find_all('td')[i+5].get_text()[2:]
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "P":   
+                        if soup.find_all('td')[i+tmp].contents != []:
+                            p = 1
+                            break
+                        else:
+                            p = 0
             
-            if soup.find_all('td')[i+6].contents != []:
-                h = True
-            else:
-                h = False
+                for tmp in range(0, header_limit):
+                    if soup.find_all('th')[tmp].get_text() == "PK":   
+                        if soup.find_all('td')[i+tmp].contents != []:
+                            pk = 1
+                            break
+                        else:
+                            pk = 0
+                        
+                i += header_limit-2
+                
+                result_evaluasi.append([kode_lelang, npwp, k, a, t, penawaran, terkoreksi, h, p, pk, alasan]) #ganti fungsi biar masuk ke tabel
+                print(kode_lelang, npwp, k, a, t, penawaran, terkoreksi, h, p, pk, alasan)
+                
+            except IndexError:
+                break
             
-            if soup.find_all('td')[i+7].contents != []:
-                p = True
-            else:
-                p = False
-            
-            if soup.find_all('td')[i+8].contents != []:
-                pk = True
-            else:
-                pk = False
-            
-            alasan = soup.find_all('td')[i+9].get_text()
-            
-            i += 11
-            
-            result_evaluasi.append([kode_lelang, npwp, k, a, t, penawaran, terkoreksi, h, p, pk, alasan]) #ganti fungsi biar masuk ke tabel
-            
-    return result_evaluasi
-            
+        print("Data from Evaluasi retrieved. (", kode_lelang, ")")    
+        return result_evaluasi   
+    
+    else:
+        return result_evaluasi 
+"""
+
 def getData_Tahap(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
@@ -262,6 +313,7 @@ def getData_Tahap(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Tahap(link, kode_lelang)
+            print("Connection to Tahap established. (", kode_lelang, ")")
                 
             linkGet = True
             break
@@ -282,17 +334,24 @@ def getData_Tahap(retry_limit, link, kode_lelang):
             i += 5
             
             result_tahap.append([kode_lelang, tahap, mulai, sampai]) #ganti fungsi biar masuk ke tabel
-
-    return result_tahap       
+    
+        print("Data from Tahap retrieved. (", kode_lelang, ")")
+        return result_tahap  
+            
+    else:
+        return result_tahap
             
 def getData_Pemenang(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
     
+    result_pemenang = None
+    
     #ambil "koneksi"
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Pemenang(link, kode_lelang)
+            print("Connection to Pemenang established. (", kode_lelang, ")")
                 
             linkGet = True
             break
@@ -307,16 +366,19 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
         if linkGet:
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    npwp = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    npwp = soup.find_all('td')[tmp+1].get_text()
                     break
             
             result_pemenang = [kode_lelang, npwp]
+            
+            print("Data from Pemenang retrieved. (", kode_lelang, ")")
             return result_pemenang
             
     except IndexError:
         for j in range(0, retry_limit): 
             try:
                 soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
+                print("Connection to Pemenang established. (", kode_lelang, ")")
                 
                 linkGet = True
                 break
@@ -330,20 +392,28 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
         if linkGet:
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    nama = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    nama = soup.find_all('td')[tmp+1].get_text()
                     break
                         
             result_pemenang = [kode_lelang, npwp]
+            
+            print("Data from Pemenang retrieved. (", kode_lelang, ")")
+            return result_pemenang
+            
+        else:
             return result_pemenang
             
 def getData_PemenangDetail(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
     
+    result_pemenangdetail = None
+    
     #ambil "koneksi"
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Pemenang(link, kode_lelang)
+            print("Connection to Pemenang (detail) established. (", kode_lelang, ")")
                 
             linkGet = True
             break
@@ -358,26 +428,32 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
         if linkGet:
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    npwp = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
                     break
             
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
-                    nama = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
                     break
             
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "Alamat":
-                    alamat = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
                     break
             
             result_pemenangdetail = [npwp, nama, alamat]
+            
+            print("Data from Pemenang (detail) retrieved. (", kode_lelang, ")")
+            return result_pemenangdetail
+            
+        else:
             return result_pemenangdetail
             
     except IndexError:
         for j in range(0, retry_limit): 
             try:
                 soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
+                print("Connection to Pemenang (detail) established. (", kode_lelang, ")")
                 
                 linkGet = True
                 break
@@ -391,10 +467,22 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
         if linkGet:
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    nama = soup.find_all('td')[tmp+1].get_text() #USE WITH CAUTION
+                    npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
                     break
-                        
+            
+            for tmp in range(0, len(soup.find_all('th'))):
+                if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                    nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
+                    break
+            
+            for tmp in range(0, len(soup.find_all('th'))):
+                if soup.find_all('th')[tmp].get_text() == "Alamat":
+                    alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
+                    break
+            
             result_pemenangdetail = [npwp, nama, alamat]
+            
+        else:
             return result_pemenangdetail
                 
 def test(location, start_point, end_point, timeout, retry_limit):
@@ -428,10 +516,44 @@ if __name__ == "__main__":
         kode_lelang = str(run) + lpse_code
         
         result_pengumuman = getData_Pengumuman(retry_limit, link, kode_lelang) #tabel lelang, a[x1, x2, ...., x12]
-        result_peserta = getData_Peserta(retry_limit, link, kode_lelang) #tabel peserta, a[x][y]
-        result_tahap = getData_Tahap(retry_limit, link, kode_lelang) #tabel tahap, a[x][y]
-        result_evaluasi = getData_Evaluasi(retry_limit, link, kode_lelang) #tabel evaluasi, a[x][y]
-        result_pemenang = getData_Pemenang(retry_limit, link, kode_lelang) #tabel pemenang, a[x1, x2]
-        result_pemenangdetail = getData_PemenangDetail(retry_limit, link, kode_lelang) #tabel pemenang_detail, a[x1, x2, x3]
         
-        #mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail)
+        if result_pengumuman == "no data":
+            continue
+        elif result_pengumuman != None:
+            result_peserta = getData_Peserta(retry_limit, link, kode_lelang) #tabel peserta, a[x][y]
+        else:
+            print("Crawler failed.")
+            break
+        
+        if result_peserta != []:
+            result_tahap = getData_Tahap(retry_limit, link, kode_lelang) #tabel tahap, a[x][y]
+        else:
+            print("Crawler failed.")
+            break
+        
+        """
+        if result_tahap != []:
+            result_evaluasi = getData_Evaluasi(retry_limit, link, kode_lelang) #tabel evaluasi, a[x][y]
+        else:
+            print("Crawler failed.")
+            break
+        """
+        
+        if result_tahap != []:
+            result_pemenang = getData_Pemenang(retry_limit, link, kode_lelang) #tabel pemenang, a[x1, x2]
+        else:
+            print("Crawler failed.")
+            break
+        
+        if result_pemenang != None:
+            result_pemenangdetail = getData_PemenangDetail(retry_limit, link, kode_lelang) #tabel pemenang_detail, a[x1, x2, x3]
+        else:
+            print("Crawler failed.")
+            break
+        
+        if result_pemenangdetail != None:
+            #mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail)
+            mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_pemenang, result_pemenangdetail)
+        else:
+            print("Crawler failed.")
+            break
