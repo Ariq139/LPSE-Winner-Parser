@@ -18,6 +18,7 @@ def gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, re
     #insertData_Evaluasi(cnx, result_evaluasi)
     insertData_Pemenang(cnx, result_pemenang)
     insertData_PemenangDetail(cnx, result_pemenangdetail)
+    print("Insert data complete.\n")
 
     cnx.close()
 
@@ -30,11 +31,12 @@ def insertData_Pengumuman(cnx, result_pengumuman):
     
     try:
         cursor.execute(add_entry, entry_data)
-    
         cnx.commit()
         
+        print("Data from Pengumuman inserted.")
+        
     except mysql.connector.Error as err:
-        print(format(err), " ( Pengumuman )")
+        print("( Pengumuman ) ", format(err))
      
 def insertData_Peserta(cnx, result_peserta):
     cursor = cnx.cursor()
@@ -45,11 +47,12 @@ def insertData_Peserta(cnx, result_peserta):
     
         try:
             cursor.execute(add_entry, entry_data)
-    
+            print("Data from Peserta inserted.")
+            
             cnx.commit()
             
         except mysql.connector.Error as err:
-            print(format(err), " ( Peserta )")
+            print("( Peserta )" format(err))
      
 def insertData_Tahap(cnx, result_tahap):
     cursor = cnx.cursor()
@@ -60,11 +63,12 @@ def insertData_Tahap(cnx, result_tahap):
     
         try:
             cursor.execute(add_entry, entry_data)
+            print("Data from Tahap inserted.")
     
             cnx.commit()
             
         except mysql.connector.Error as err:
-            print(format(err), " ( Tahap )")
+            print("( Tahap )", format(err))
 
 """
 def insertData_Evaluasi(cnx, result_evaluasi):
@@ -91,11 +95,12 @@ def insertData_Pemenang(cnx, result_pemenang):
     
     try:
         cursor.execute(add_entry, entry_data)
+        print("Data from Pemenang inserted.")
     
         cnx.commit()
         
     except mysql.connector.Error as err:
-        print(format(err), " ( Pemenang )")
+        print("( Pemenang )", format(err), )
         
 def insertData_PemenangDetail(cnx, result_pemenangdetail):
     cursor = cnx.cursor()
@@ -105,6 +110,7 @@ def insertData_PemenangDetail(cnx, result_pemenangdetail):
     
     try:
         cursor.execute(add_entry, entry_data)
+        print("Data from Pemenang (detail) inserted.")
     
         cnx.commit()
         
@@ -112,7 +118,7 @@ def insertData_PemenangDetail(cnx, result_pemenangdetail):
         if err.errno == 1062: #duplicate primary
             pass #biarkan
         else:
-            print(format(err), " ( PemenangDetail )")
+            print("( PemenangDetail )", format(err))
  
 if __name__ == "__main__":
     server = str(sys.argv[1])

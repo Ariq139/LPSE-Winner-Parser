@@ -77,7 +77,7 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
             soup = linkConnect_Pengumuman(link, kode_lelang)
                 
             linkGet = True
-            print("Connection to Pengumuman established. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Connection to Pengumuman established.")
             break
         
         except urllib.error.HTTPError as e:
@@ -149,7 +149,7 @@ def getData_Pengumuman(retry_limit, link, kode_lelang):
         
         result_pengumuman = [kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, jml_peserta]
         
-        print("Data from Pengumuman retrieved. (", kode_lelang, ")")
+        print("(", kode_lelang, ") Data from Pengumuman retrieved.")
         return result_pengumuman
         
     else:
@@ -164,7 +164,7 @@ def getData_Peserta(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Peserta(link, kode_lelang)
-            print("Connection to Peserta established. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Connection to Peserta established.")
                 
             linkGet = True
             break
@@ -187,7 +187,7 @@ def getData_Peserta(retry_limit, link, kode_lelang):
             
             i += 5
          
-        print("Data from Peserta retrieved. (", kode_lelang, ")")        
+        print("(", kode_lelang, ") Data from Peserta retrieved.")        
         return result_peserta
     
     else:
@@ -313,7 +313,7 @@ def getData_Tahap(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Tahap(link, kode_lelang)
-            print("Connection to Tahap established. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Connection to Tahap established.")
                 
             linkGet = True
             break
@@ -335,7 +335,7 @@ def getData_Tahap(retry_limit, link, kode_lelang):
             
             result_tahap.append([kode_lelang, tahap, mulai, sampai]) #ganti fungsi biar masuk ke tabel
     
-        print("Data from Tahap retrieved. (", kode_lelang, ")")
+        print("(", kode_lelang, ") Data from Tahap retrieved.")
         return result_tahap  
             
     else:
@@ -344,6 +344,7 @@ def getData_Tahap(retry_limit, link, kode_lelang):
 def getData_Pemenang(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
+    linkGet_ = False
     
     result_pemenang = None
     
@@ -351,7 +352,7 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Pemenang(link, kode_lelang)
-            print("Connection to Pemenang established. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Connection to Pemenang established.")
                 
             linkGet = True
             break
@@ -362,50 +363,54 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
         except urllib.error.URLError as e:
             print('Error: ', e.reason)
                 
-    try:
-        if linkGet:
-            for tmp in range(0, len(soup.find_all('th'))):
+    if linkGet:
+            
+        length = len(soup.find_all('th'))
+            
+        if length > 0:
+            for tmp in range(0, length):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
                     npwp = soup.find_all('td')[tmp+1].get_text()
+                    result_pemenang = [kode_lelang, npwp]
+                    
+                    return result_pemenang
                     break
-            
-            result_pemenang = [kode_lelang, npwp]
-            
-            print("Data from Pemenang retrieved. (", kode_lelang, ")")
-            return result_pemenang
-            
-    except IndexError:
-        for j in range(0, retry_limit): 
-            try:
-                soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
-                print("Connection to Pemenang established. (", kode_lelang, ")")
-                
-                linkGet = True
-                break
-        
-            except urllib.error.HTTPError as e:
-                print('Error: ', e.code)
-                
-            except urllib.error.URLError as e:
-                print('Error: ', e.reason)
-                
-        if linkGet:
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    nama = soup.find_all('td')[tmp+1].get_text()
-                    break
-                        
-            result_pemenang = [kode_lelang, npwp]
-            
-            print("Data from Pemenang retrieved. (", kode_lelang, ")")
-            return result_pemenang
-            
         else:
-            return result_pemenang
+            for j in range(0, retry_limit): 
+                try:
+                    soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
+                    print("(", kode_lelang, ") Connection to Pemenang (alt.) established.")
+                
+                    linkGet_ = True
+                    break
+        
+                except urllib.error.HTTPError as e:
+                    print('Error: ', e.code)
+                
+                except urllib.error.URLError as e:
+                    print('Error: ', e.reason)
+        
+            if linkGet_:
+                    
+                length = len(soup.find_all('th'))
             
+                if length > 0:
+                    for tmp in range(0, len(soup.find_all('th'))):
+                        if soup.find_all('th')[tmp].get_text() == "NPWP":
+                            nama = soup.find_all('td')[tmp+1].get_text() 
+                            result_pemenang = [kode_lelang, npwp]
+                            break
+
+                    print("(", kode_lelang, ") Data from Pemenang retrieved.")
+                    return result_pemenang
+                            
+                else:
+                    return "no data"
+                            
 def getData_PemenangDetail(retry_limit, link, kode_lelang):
     soup = None
     linkGet = False
+    linkGet_ = False
     
     result_pemenangdetail = None
     
@@ -413,7 +418,7 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
     for j in range(0, retry_limit): 
         try:
             soup = linkConnect_Pemenang(link, kode_lelang)
-            print("Connection to Pemenang (detail) established. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Connection to Pemenang (detail) established.")
                 
             linkGet = True
             break
@@ -424,8 +429,11 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
         except urllib.error.URLError as e:
             print('Error: ', e.reason)
                 
-    try:
-        if linkGet:
+    if linkGet:
+            
+        length = len(soup.find_all('th'))
+            
+        if length > 0:
             for tmp in range(0, len(soup.find_all('th'))):
                 if soup.find_all('th')[tmp].get_text() == "NPWP":
                     npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
@@ -443,47 +451,48 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
             
             result_pemenangdetail = [npwp, nama, alamat]
             
-            print("Data from Pemenang (detail) retrieved. (", kode_lelang, ")")
+            print("(", kode_lelang, ") Data from Pemenang (detail) retrieved.")
             return result_pemenangdetail
             
         else:
-            return result_pemenangdetail
-            
-    except IndexError:
-        for j in range(0, retry_limit): 
-            try:
-                soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
-                print("Connection to Pemenang (detail) established. (", kode_lelang, ")")
-                
-                linkGet = True
-                break
+            for j in range(0, retry_limit): 
+                try:
+                    soup = linkConnect_PemenangBerkontrak(link, kode_lelang)
+                    print("(", kode_lelang, ") Connection to Pemenang (detail)(alt.) established.")
+                    
+                    linkGet_ = True
+                    break
         
-            except urllib.error.HTTPError as e:
-                print('Error: ', e.code)
+                except urllib.error.HTTPError as e:
+                    print('Error: ', e.code)
                 
-            except urllib.error.URLError as e:
-                print('Error: ', e.reason)
+                except urllib.error.URLError as e:
+                    print('Error: ', e.reason)
                 
-        if linkGet:
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+            if linkGet_:
+                    
+                length = len(soup.find_all('th'))
             
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
-                    nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+                if length > 0:
+                    for tmp in range(0, length):
+                        if soup.find_all('th')[tmp].get_text() == "NPWP":
+                            npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
+                            break
             
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "Alamat":
-                    alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+                    for tmp in range(0, length):
+                        if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                            nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
+                            break
             
-            result_pemenangdetail = [npwp, nama, alamat]
+                    for tmp in range(0, length):
+                        if soup.find_all('th')[tmp].get_text() == "Alamat":
+                            alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
+                            break
             
-        else:
-            return result_pemenangdetail
+                    result_pemenangdetail = [npwp, nama, alamat]
+            
+                else:
+                    return "no data"
                 
 def test(location, start_point, end_point, timeout, retry_limit):
     print(location)
@@ -545,15 +554,14 @@ if __name__ == "__main__":
             print("Crawler failed.")
             break
         
-        if result_pemenang != None:
-            result_pemenangdetail = getData_PemenangDetail(retry_limit, link, kode_lelang) #tabel pemenang_detail, a[x1, x2, x3]
+        if result_pemenang == "no data":
+            print("No data in Pemenang. Skipping...")
+            continue
         else:
-            print("Crawler failed.")
-            break
-        
-        if result_pemenangdetail != None:
+            result_pemenangdetail = getData_PemenangDetail(retry_limit, link, kode_lelang) #tabel pemenang_detail, a[x1, x2, x3]
+            
+            print("\n")
             #mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail)
             mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_pemenang, result_pemenangdetail)
-        else:
-            print("Crawler failed.")
-            break
+        
+       
