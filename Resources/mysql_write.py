@@ -33,7 +33,7 @@ def insertData_Pengumuman(cnx, result_pengumuman):
         cursor.execute(add_entry, entry_data)
         cnx.commit()
         
-        print("Data from Pengumuman inserted.")
+        print("(", result_pengumuman[0], ") Data from Pengumuman inserted.")
         
     except mysql.connector.Error as err:
         print("( Pengumuman ) ", format(err))
@@ -47,7 +47,7 @@ def insertData_Peserta(cnx, result_peserta):
     
         try:
             cursor.execute(add_entry, entry_data)
-            print("Data from Peserta inserted.")
+            print("(", result_peserta[i][0], ") Data from Peserta inserted.")
             
             cnx.commit()
             
@@ -63,7 +63,7 @@ def insertData_Tahap(cnx, result_tahap):
     
         try:
             cursor.execute(add_entry, entry_data)
-            print("Data from Tahap inserted.")
+            print("(", result_tahap[i][0], ") Data from Tahap inserted.")
     
             cnx.commit()
             
@@ -95,7 +95,7 @@ def insertData_Pemenang(cnx, result_pemenang):
     
     try:
         cursor.execute(add_entry, entry_data)
-        print("Data from Pemenang inserted.")
+        print("(", result_pemenang[0], ") Data from Pemenang inserted.")
     
         cnx.commit()
         
@@ -116,6 +116,7 @@ def insertData_PemenangDetail(cnx, result_pemenangdetail):
         
     except mysql.connector.Error as err:
         if err.errno == 1062: #duplicate primary
+            print("Data already in database. Skipping...")
             pass #biarkan
         else:
             print("( PemenangDetail )", format(err))

@@ -396,7 +396,8 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
                     break
         
                 except urllib.error.HTTPError as e:
-                    print('Error: ', e.code)
+                    if e.code == 404:
+                        return "no data"
                 
                 except urllib.error.URLError as e:
                     print('Error: ', e.reason)
