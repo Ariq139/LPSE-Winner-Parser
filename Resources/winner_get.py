@@ -176,17 +176,28 @@ def getData_Peserta(retry_limit, link, kode_lelang):
             print('Error: ', e.reason)
                 
     if linkGet:
-        i = 1
-        while i < len(soup.find_all('td')):
-            nama = soup.find_all('td')[i].get_text()
-            npwp = soup.find_all('td')[i+1].get_text()
-            penawaran = soup.find_all('td')[i+2].get_text()
-            terkoreksi = soup.find_all('td')[i+3].get_text()
+        i = 0
+        
+        length = len(soup.find_all('th'))
+        
+        if length > 2:
+            while i < len(soup.find_all('td')):
+                nama = soup.find_all('td')[i].get_text()
+                npwp = soup.find_all('td')[i+1].get_text()
+                penawaran = soup.find_all('td')[i+2].get_text()
+                terkoreksi = soup.find_all('td')[i+3].get_text()
             
-            result_peserta.append([kode_lelang, nama, npwp, penawaran, terkoreksi]) #ganti fungsi biar masuk ke tabel
+                result_peserta.append([kode_lelang, nama, npwp, penawaran, terkoreksi]) #ganti fungsi biar masuk ke tabel
             
-            i += 5
-         
+                i += 5
+        else:
+            while i < len(soup.find_all('td')):
+                nama = soup.find_all('td')[i+1].get_text()
+            
+                result_peserta.append([kode_lelang, nama, "no data", "no data", "no data"]) #ganti fungsi biar masuk ke tabel
+            
+                i += 2
+                
         print("(", kode_lelang, ") Data from Peserta retrieved.")        
         return result_peserta
     

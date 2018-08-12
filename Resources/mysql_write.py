@@ -52,7 +52,7 @@ def insertData_Peserta(cnx, result_peserta):
             cnx.commit()
             
         except mysql.connector.Error as err:
-            print("( Peserta )" format(err))
+            print("( Peserta )", format(err))
      
 def insertData_Tahap(cnx, result_tahap):
     cursor = cnx.cursor()
