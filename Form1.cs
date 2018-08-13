@@ -26,6 +26,7 @@ namespace LPSE_UGM_Winner_Parser
         private void Form1_Load(object sender, EventArgs e)
         {
             locCombo.SelectedIndex = 0;
+            graphLocBox.SelectedIndex = 0;
 
             //getData_Leaderboard();
 
@@ -92,12 +93,6 @@ namespace LPSE_UGM_Winner_Parser
         {
             detailForm dF = new detailForm();
             dF.Show();
-        }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            aboutBox about = new aboutBox();
-            about.Show();
         }
 
         private void locGraph_Click(object sender, EventArgs e)
@@ -242,12 +237,6 @@ namespace LPSE_UGM_Winner_Parser
             System.Diagnostics.Process.Start("http://lpse."+loc+".id/eproc4/evaluasi/"+ searchBox.Text + "/pemenang");
         }
 
-        private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            new db_login().ShowDialog();
-        }
-
         private void locCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             exportBtn.Enabled = false;
@@ -298,9 +287,20 @@ namespace LPSE_UGM_Winner_Parser
             }
         }
 
-        private void crawlerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void dataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new crawler().ShowDialog();
+        }
+
+        private void disconnectFromDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new db_login().ShowDialog();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //System.Diagnostics.Process.Start("readme.pdf");
         }
     }
 }

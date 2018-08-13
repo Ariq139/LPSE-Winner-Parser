@@ -34,10 +34,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crawlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectFromDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.detailSearchGet = new System.Windows.Forms.Button();
             this.idGet = new System.Windows.Forms.Button();
@@ -62,6 +59,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.searchIDTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.graphLocBox = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
@@ -88,8 +87,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -150,43 +148,22 @@
             this.dataToolStripMenuItem,
             this.disconnectFromDatabaseToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.databaseToolStripMenuItem.Text = "Database";
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.databaseToolStripMenuItem.Text = "Data";
             // 
             // dataToolStripMenuItem
             // 
-            this.dataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.crawlerToolStripMenuItem});
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.dataToolStripMenuItem.Text = "Data";
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.addToolStripMenuItem.Text = "Add Manually";
-            // 
-            // crawlerToolStripMenuItem
-            // 
-            this.crawlerToolStripMenuItem.Name = "crawlerToolStripMenuItem";
-            this.crawlerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.crawlerToolStripMenuItem.Text = "Crawler";
-            this.crawlerToolStripMenuItem.Click += new System.EventHandler(this.crawlerToolStripMenuItem_Click);
+            this.dataToolStripMenuItem.Text = "Crawler";
+            this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
             // 
             // disconnectFromDatabaseToolStripMenuItem
             // 
             this.disconnectFromDatabaseToolStripMenuItem.Name = "disconnectFromDatabaseToolStripMenuItem";
-            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.disconnectFromDatabaseToolStripMenuItem.Text = "Disconnect";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.helpToolStripMenuItem.Text = "About";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            this.disconnectFromDatabaseToolStripMenuItem.Click += new System.EventHandler(this.disconnectFromDatabaseToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -433,7 +410,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.graphLocBox);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
@@ -451,6 +428,33 @@
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "Graph/Network";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(91, 119);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(126, 22);
+            this.button3.TabIndex = 16;
+            this.button3.Text = "Reset to default";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // graphLocBox
+            // 
+            this.graphLocBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.graphLocBox.FormattingEnabled = true;
+            this.graphLocBox.Items.AddRange(new object[] {
+            "Semua",
+            "Bantul",
+            "Kulonprogo",
+            "Sleman",
+            "Gunungkidul",
+            "Kota Yogyakarta",
+            "D.I.Yogyakarta",
+            "Universitas Gadjah Mada"});
+            this.graphLocBox.Location = new System.Drawing.Point(9, 28);
+            this.graphLocBox.Name = "graphLocBox";
+            this.graphLocBox.Size = new System.Drawing.Size(264, 21);
+            this.graphLocBox.TabIndex = 15;
             // 
             // groupBox5
             // 
@@ -693,32 +697,12 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Wilayah";
             // 
-            // comboBox1
+            // helpToolStripMenuItem
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Semua",
-            "Bantul",
-            "Kulonprogo",
-            "Sleman",
-            "Gunungkidul",
-            "Kota Yogyakarta",
-            "D.I.Yogyakarta",
-            "Universitas Gadjah Mada"});
-            this.comboBox1.Location = new System.Drawing.Point(9, 28);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(264, 21);
-            this.comboBox1.TabIndex = 15;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(91, 119);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 22);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "Reset to default";
-            this.button3.UseVisualStyleBackColor = true;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -760,7 +744,6 @@
         #endregion
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage searchLocTab;
         private System.Windows.Forms.DataGridView dataLelang;
@@ -789,8 +772,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crawlerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disconnectFromDatabaseToolStripMenuItem;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
@@ -818,8 +799,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button graphOpt;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox graphLocBox;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }
 
