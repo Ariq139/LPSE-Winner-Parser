@@ -182,10 +182,10 @@ def getData_Peserta(retry_limit, link, kode_lelang):
         
         if length > 2:
             while i < len(soup.find_all('td')):
-                nama = soup.find_all('td')[i].get_text()
-                npwp = soup.find_all('td')[i+1].get_text()
-                penawaran = soup.find_all('td')[i+2].get_text()
-                terkoreksi = soup.find_all('td')[i+3].get_text()
+                nama = soup.find_all('td')[i+1].get_text()
+                npwp = soup.find_all('td')[i+2].get_text()
+                penawaran = soup.find_all('td')[i+3].get_text()
+                terkoreksi = soup.find_all('td')[i+4].get_text()
             
                 result_peserta.append([kode_lelang, nama, npwp, penawaran, terkoreksi]) #ganti fungsi biar masuk ke tabel
             
