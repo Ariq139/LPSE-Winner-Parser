@@ -35,6 +35,7 @@
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectFromDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.detailSearchGet = new System.Windows.Forms.Button();
             this.idGet = new System.Windows.Forms.Button();
@@ -50,13 +51,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.searchLocTab = new System.Windows.Forms.TabPage();
-            this.exportBtn = new System.Windows.Forms.Button();
+            this.overviewTab = new System.Windows.Forms.TabPage();
             this.dataLelang = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
-            this.locCombo = new System.Windows.Forms.ComboBox();
-            this.locGet = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.searchIDTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
@@ -87,12 +84,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.searchLocTab.SuspendLayout();
+            this.overviewTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLelang)).BeginInit();
             this.searchIDTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -154,16 +150,23 @@
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.dataToolStripMenuItem.Text = "Crawler";
             this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
             // 
             // disconnectFromDatabaseToolStripMenuItem
             // 
             this.disconnectFromDatabaseToolStripMenuItem.Name = "disconnectFromDatabaseToolStripMenuItem";
-            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.disconnectFromDatabaseToolStripMenuItem.Text = "Disconnect";
             this.disconnectFromDatabaseToolStripMenuItem.Click += new System.EventHandler(this.disconnectFromDatabaseToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -315,31 +318,17 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "ID";
             // 
-            // searchLocTab
+            // overviewTab
             // 
-            this.searchLocTab.Controls.Add(this.exportBtn);
-            this.searchLocTab.Controls.Add(this.dataLelang);
-            this.searchLocTab.Controls.Add(this.label3);
-            this.searchLocTab.Controls.Add(this.locCombo);
-            this.searchLocTab.Controls.Add(this.locGet);
-            this.searchLocTab.Controls.Add(this.label1);
-            this.searchLocTab.Location = new System.Drawing.Point(4, 22);
-            this.searchLocTab.Name = "searchLocTab";
-            this.searchLocTab.Padding = new System.Windows.Forms.Padding(3);
-            this.searchLocTab.Size = new System.Drawing.Size(540, 320);
-            this.searchLocTab.TabIndex = 0;
-            this.searchLocTab.Text = "Search by Location";
-            this.searchLocTab.UseVisualStyleBackColor = true;
-            // 
-            // exportBtn
-            // 
-            this.exportBtn.Location = new System.Drawing.Point(258, 26);
-            this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(75, 23);
-            this.exportBtn.TabIndex = 17;
-            this.exportBtn.Text = "Export...";
-            this.exportBtn.UseVisualStyleBackColor = true;
-            this.exportBtn.Click += new System.EventHandler(this.exportBtn_Click);
+            this.overviewTab.Controls.Add(this.dataLelang);
+            this.overviewTab.Controls.Add(this.label3);
+            this.overviewTab.Location = new System.Drawing.Point(4, 22);
+            this.overviewTab.Name = "overviewTab";
+            this.overviewTab.Padding = new System.Windows.Forms.Padding(3);
+            this.overviewTab.Size = new System.Drawing.Size(540, 320);
+            this.overviewTab.TabIndex = 0;
+            this.overviewTab.Text = "Search by Location";
+            this.overviewTab.UseVisualStyleBackColor = true;
             // 
             // dataLelang
             // 
@@ -358,47 +347,9 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Data Lelang";
             // 
-            // locCombo
-            // 
-            this.locCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.locCombo.FormattingEnabled = true;
-            this.locCombo.Items.AddRange(new object[] {
-            "Semua",
-            "Bantul",
-            "Kulonprogo",
-            "Sleman",
-            "Gunungkidul",
-            "Kota Yogyakarta",
-            "D.I.Yogyakarta",
-            "Universitas Gadjah Mada"});
-            this.locCombo.Location = new System.Drawing.Point(6, 27);
-            this.locCombo.Name = "locCombo";
-            this.locCombo.Size = new System.Drawing.Size(165, 21);
-            this.locCombo.TabIndex = 13;
-            this.locCombo.SelectedIndexChanged += new System.EventHandler(this.locCombo_SelectedIndexChanged);
-            // 
-            // locGet
-            // 
-            this.locGet.Location = new System.Drawing.Point(177, 26);
-            this.locGet.Name = "locGet";
-            this.locGet.Size = new System.Drawing.Size(75, 23);
-            this.locGet.TabIndex = 2;
-            this.locGet.Text = "Get Data";
-            this.locGet.UseVisualStyleBackColor = true;
-            this.locGet.Click += new System.EventHandler(this.locGet_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Wilayah";
-            // 
             // searchIDTab
             // 
-            this.searchIDTab.Controls.Add(this.searchLocTab);
+            this.searchIDTab.Controls.Add(this.overviewTab);
             this.searchIDTab.Controls.Add(this.tabPage3);
             this.searchIDTab.Controls.Add(this.tabPage1);
             this.searchIDTab.Location = new System.Drawing.Point(13, 34);
@@ -697,13 +648,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Wilayah";
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -722,8 +666,8 @@
             this.menuStrip1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.searchLocTab.ResumeLayout(false);
-            this.searchLocTab.PerformLayout();
+            this.overviewTab.ResumeLayout(false);
+            this.overviewTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLelang)).EndInit();
             this.searchIDTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -745,11 +689,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage searchLocTab;
+        private System.Windows.Forms.TabPage overviewTab;
         private System.Windows.Forms.DataGridView dataLelang;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button locGet;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl searchIDTab;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -766,9 +708,7 @@
         private System.Windows.Forms.Label nameSearch;
         private System.Windows.Forms.Button detailSearchGet;
         private System.Windows.Forms.Button topGraph;
-        private System.Windows.Forms.ComboBox locCombo;
         private System.Windows.Forms.DataGridView dataLeaderboard;
-        private System.Windows.Forms.Button exportBtn;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataToolStripMenuItem;

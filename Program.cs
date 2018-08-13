@@ -15,6 +15,8 @@ namespace LPSE_UGM_Winner_Parser
         [STAThread]
         static void Main()
         {
+            Console.WriteLine("DON'T CLOSE THIS CONSOLE WINDOW.\nDOING SO WILL CLOSE THE APPLICATION.");
+            Console.WriteLine("JANGAN TUTUP JENDELA INI.\nJIKA TETAP DILAKUKAN MAKA APLIKASI AKAN IKUT TERTUTUP.");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new db_login());

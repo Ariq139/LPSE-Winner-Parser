@@ -25,7 +25,6 @@ namespace LPSE_UGM_Winner_Parser
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            locCombo.SelectedIndex = 0;
             graphLocBox.SelectedIndex = 0;
 
             //getData_Leaderboard();
@@ -101,57 +100,6 @@ namespace LPSE_UGM_Winner_Parser
             {
                 MessageBox.Show("Data terlalu banyak (> 10.000).\nSilahkan pilih lokasi lain.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void locGet_Click(object sender, EventArgs e)
-        {
-            string command = "SELECT * FROM ";
-
-            if (locCombo.SelectedIndex == 0)
-            {
-                location_db = "lelang";
-                openedData = "semua";
-            }
-            else if (locCombo.SelectedIndex == 1)
-            {
-                location_db = Program.db + ".bantul";
-                openedData = "bantul";
-            }
-            else if (locCombo.SelectedIndex == 2)
-            {
-                location_db = Program.db + ".kulonprogo";
-                openedData = "kulonprogo";
-            }
-            else if (locCombo.SelectedIndex == 3)
-            {
-                location_db = Program.db + ".sleman";
-                openedData = "sleman";
-            }
-            else if (locCombo.SelectedIndex == 4)
-            {
-                location_db = Program.db + ".gunungkidul";
-                openedData = "gunungkidul";
-            }
-            else if (locCombo.SelectedIndex == 5)
-            {
-                location_db = Program.db + ".jogjakota";
-                openedData = "jogjakota";
-            }
-            else if (locCombo.SelectedIndex == 6)
-            {
-                location_db = Program.db + ".jogjaprov";
-                openedData = "jogjaprov";
-            }
-            else if (locCombo.SelectedIndex == 7)
-            {
-                location_db = Program.db + ".ugm";
-                openedData = "ugm";
-            }
-
-            command += location_db;
-
-            getData_Loc(command);
-            exportBtn.Enabled = true;
         }
 
         private void idGet_Click(object sender, EventArgs e)
@@ -235,11 +183,6 @@ namespace LPSE_UGM_Winner_Parser
             }
 
             System.Diagnostics.Process.Start("http://lpse."+loc+".id/eproc4/evaluasi/"+ searchBox.Text + "/pemenang");
-        }
-
-        private void locCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            exportBtn.Enabled = false;
         }
 
         private void exportBtn_Click(object sender, EventArgs e)

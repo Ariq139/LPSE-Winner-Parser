@@ -520,6 +520,11 @@ def test(location, start_point, end_point, timeout, retry_limit):
         #print row[0]
 
 if __name__ == "__main__":
+
+    if len(sys.argv) == 10:
+        pw = ""
+    else:
+        pw = str(sys.argv[10])
     start_point = int(sys.argv[1])
     end_point = int(sys.argv[2])
     retry_limit = int(sys.argv[3])
@@ -530,7 +535,6 @@ if __name__ == "__main__":
     port = str(sys.argv[7])
     db = str(sys.argv[8])
     user = str(sys.argv[9])
-    pw = str(sys.argv[10])
     
     #mulai dari start sampai end, input dari UI
     for run in range(start_point, end_point+1): #i=start_point;i<end_point+1;i++
@@ -552,13 +556,11 @@ if __name__ == "__main__":
             print("Crawler failed.")
             break
         
-        """
-        if result_tahap != []:
-            result_evaluasi = getData_Evaluasi(retry_limit, link, kode_lelang) #tabel evaluasi, a[x][y]
-        else:
-            print("Crawler failed.")
-            break
-        """
+        #if result_tahap != []:
+            #result_evaluasi = getData_Evaluasi(retry_limit, link, kode_lelang) #tabel evaluasi, a[x][y]
+        #else:
+            #print("Crawler failed.")
+            #break
         
         if result_tahap != []:
             result_pemenang = getData_Pemenang(retry_limit, link, kode_lelang) #tabel pemenang, a[x1, x2]
@@ -574,6 +576,6 @@ if __name__ == "__main__":
             
             print("\n")
             #mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_evaluasi, result_pemenang, result_pemenangdetail)
+            
             mysql_write.gatherData(server, port, db, user, pw, result_pengumuman, result_peserta, result_tahap, result_pemenang, result_pemenangdetail)
-        
-       
+    print("End.")

@@ -36,7 +36,11 @@ def insertData_Pengumuman(cnx, result_pengumuman):
         print("(", result_pengumuman[0], ") Data from Pengumuman inserted.")
         
     except mysql.connector.Error as err:
-        print("( Pengumuman ) ", format(err))
+            if err.errno == 1062: #duplicate primary
+                print("( Pengumuman ) Data already in database. Skipping...")
+                pass #biarkan
+            else:
+                print("( Pengumuman ) Error ", err.errno)
      
 def insertData_Peserta(cnx, result_peserta):
     cursor = cnx.cursor()
@@ -52,7 +56,11 @@ def insertData_Peserta(cnx, result_peserta):
             cnx.commit()
             
         except mysql.connector.Error as err:
-            print("( Peserta )", format(err))
+            if err.errno == 1062: #duplicate primary
+                print("( Peserta ) Data already in database. Skipping...")
+                pass #biarkan
+            else:
+                print("( Peserta ) Error ", err.errno)
      
 def insertData_Tahap(cnx, result_tahap):
     cursor = cnx.cursor()
@@ -68,7 +76,11 @@ def insertData_Tahap(cnx, result_tahap):
             cnx.commit()
             
         except mysql.connector.Error as err:
-            print("( Tahap )", format(err))
+            if err.errno == 1062: #duplicate primary
+                print("( Tahap ) Data already in database. Skipping...")
+                pass #biarkan
+            else:
+                print("( Tahap ) Error ", err.errno)
 
 """
 def insertData_Evaluasi(cnx, result_evaluasi):
@@ -100,7 +112,11 @@ def insertData_Pemenang(cnx, result_pemenang):
         cnx.commit()
         
     except mysql.connector.Error as err:
-        print("( Pemenang )", format(err), )
+        if err.errno == 1062: #duplicate primary
+            print("( Pemenang ) Data already in database. Skipping...")
+            pass #biarkan
+        else:
+            print("( Pemenang ) Error ", err.errno)
         
 def insertData_PemenangDetail(cnx, result_pemenangdetail):
     cursor = cnx.cursor()
@@ -116,10 +132,10 @@ def insertData_PemenangDetail(cnx, result_pemenangdetail):
         
     except mysql.connector.Error as err:
         if err.errno == 1062: #duplicate primary
-            print("Data already in database. Skipping...")
+            print("( PemenangDetail ) Data already in database. Skipping...")
             pass #biarkan
         else:
-            print("( PemenangDetail )", format(err))
+            print("( PemenangDetail ) Error ", err.errno)
  
 if __name__ == "__main__":
     server = str(sys.argv[1])
