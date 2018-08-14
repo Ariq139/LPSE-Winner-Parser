@@ -40,6 +40,8 @@ namespace LPSE_UGM_Winner_Parser
                     MySqlCommand cmd = new MySqlCommand(command, conn);
                     conn.Open();
                     conn.Close();
+
+
                 }
                 catch (MySqlException ex)
                 {

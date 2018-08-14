@@ -29,28 +29,18 @@
         private void InitializeComponent()
         {
             this.dataDetail = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataDetail)).BeginInit();
             this.SuspendLayout();
             // 
             // dataDetail
             // 
+            this.dataDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataDetail.Location = new System.Drawing.Point(12, 12);
             this.dataDetail.Name = "dataDetail";
             this.dataDetail.Size = new System.Drawing.Size(665, 336);
             this.dataDetail.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(266, 354);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Open the graph";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // checkBox1
             // 
@@ -69,10 +59,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(689, 383);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataDetail);
             this.Name = "detailForm";
-            this.Text = "detailForm";
+            this.Text = "Leader";
             this.Load += new System.EventHandler(this.detailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataDetail)).EndInit();
             this.ResumeLayout(false);
@@ -83,7 +72,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataDetail;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox1;
     }
 }

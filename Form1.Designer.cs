@@ -74,6 +74,9 @@
             this.graphOpt = new System.Windows.Forms.Button();
             this.createGraphBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.limitLeaderboardBtn = new System.Windows.Forms.Button();
+            this.limitLeaderboardBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -89,8 +92,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.limitLeaderboardBtn);
             this.groupBox1.Controls.Add(this.rldBtn);
+            this.groupBox1.Controls.Add(this.limitLeaderboardBox);
             this.groupBox1.Controls.Add(this.dataLeaderboard);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.topGraph);
             this.groupBox1.Location = new System.Drawing.Point(567, 48);
             this.groupBox1.Name = "groupBox1";
@@ -113,9 +119,9 @@
             // 
             this.dataLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataLeaderboard.Location = new System.Drawing.Point(7, 20);
+            this.dataLeaderboard.Location = new System.Drawing.Point(7, 62);
             this.dataLeaderboard.Name = "dataLeaderboard";
-            this.dataLeaderboard.Size = new System.Drawing.Size(223, 277);
+            this.dataLeaderboard.Size = new System.Drawing.Size(223, 235);
             this.dataLeaderboard.TabIndex = 23;
             // 
             // topGraph
@@ -310,6 +316,7 @@
             this.button3.TabIndex = 16;
             this.button3.Text = "Reset to default";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // graphLocBox
             // 
@@ -348,7 +355,7 @@
             this.repulsionBox.Name = "repulsionBox";
             this.repulsionBox.Size = new System.Drawing.Size(126, 20);
             this.repulsionBox.TabIndex = 7;
-            this.repulsionBox.Text = "2000.";
+            this.repulsionBox.Text = "2000";
             // 
             // timeBox
             // 
@@ -546,6 +553,33 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Data";
             // 
+            // limitLeaderboardBtn
+            // 
+            this.limitLeaderboardBtn.Location = new System.Drawing.Point(84, 34);
+            this.limitLeaderboardBtn.Name = "limitLeaderboardBtn";
+            this.limitLeaderboardBtn.Size = new System.Drawing.Size(52, 23);
+            this.limitLeaderboardBtn.TabIndex = 24;
+            this.limitLeaderboardBtn.Text = "Go";
+            this.limitLeaderboardBtn.UseVisualStyleBackColor = true;
+            this.limitLeaderboardBtn.Click += new System.EventHandler(this.limitLeaderboardBtn_Click);
+            // 
+            // limitLeaderboardBox
+            // 
+            this.limitLeaderboardBox.Location = new System.Drawing.Point(9, 36);
+            this.limitLeaderboardBox.Name = "limitLeaderboardBox";
+            this.limitLeaderboardBox.Size = new System.Drawing.Size(69, 20);
+            this.limitLeaderboardBox.TabIndex = 23;
+            this.limitLeaderboardBox.Text = "10";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Limit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,6 +593,7 @@
             this.Text = "LPSE Winner Parser";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -628,6 +663,9 @@
         private System.Windows.Forms.Button idGet;
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button limitLeaderboardBtn;
+        private System.Windows.Forms.TextBox limitLeaderboardBox;
+        private System.Windows.Forms.Label label4;
     }
 }
 

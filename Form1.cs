@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace LPSE_UGM_Winner_Parser
     {
 
         public string openedData;
+        public string kode_lpse;
         public string location_db = "";
         public string connect = "server=" + Program.server + ";port=" + Program.port + ";user=" + Program.user + ";password=" + Program.pass + ";database=" + Program.db + ";";
 
@@ -29,7 +31,7 @@ namespace LPSE_UGM_Winner_Parser
             graphLocBox.SelectedIndex = 0;
             sortBox.SelectedIndex = 0;
 
-            getData_Leaderboard();
+            getData_Leaderboard(Int32.Parse(limitLeaderboardBox.Text));
 
             groupBox2.Visible = false;
             groupBox3.Visible = false;
@@ -37,10 +39,10 @@ namespace LPSE_UGM_Winner_Parser
             groupBox5.Visible = false;
         }
 
-        private void getData_Leaderboard()
+        private void getData_Leaderboard(int limit)
         {
             DataTable dt = new DataTable();
-            string command = "SELECT pemenang_detail.nama_perusahaan Nama_Perusahaan, count(*) Jumlah FROM pemenang,pemenang_detail WHERE pemenang_detail.npwp = pemenang.npwp GROUP BY pemenang_detail.nama_perusahaan ORDER BY count(*) desc limit 10";
+            string command = "SELECT pemenang_detail.nama_perusahaan Nama_Perusahaan, count(*) Jumlah FROM pemenang,pemenang_detail WHERE pemenang_detail.npwp = pemenang.npwp GROUP BY pemenang_detail.nama_perusahaan ORDER BY count(*) desc limit " + limit;
             using (MySqlConnection conn = new MySqlConnection(connect))
             {
                 MySqlCommand cmd = new MySqlCommand(command, conn);
@@ -126,40 +128,6 @@ namespace LPSE_UGM_Winner_Parser
                 }
             }
         }
-        private void detailSearchGet_Click(object sender, EventArgs e)
-        {
-            string loc = "";
-            if (searchBox.Text.EndsWith("303"))
-            {
-                loc = "ugm.ac";
-            }
-            else if (searchBox.Text.EndsWith("367"))
-            {
-                loc = "kulonprogokab.go";
-            }
-            else if (searchBox.Text.EndsWith("021"))
-            {
-                loc = "jogjakota.go";
-            }
-            else if (searchBox.Text.EndsWith("054"))
-            {
-                loc = "slemankab.go";
-            }
-            else if (searchBox.Text.EndsWith("013"))
-            {
-                loc = "jogjaprov.go";
-            }
-            else if (searchBox.Text.EndsWith("621"))
-            {
-                loc = "gunungkidulkab.go";
-            }
-            else if (searchBox.Text.EndsWith("285"))
-            {
-                loc = "bantulkab.go";
-            }
-
-            System.Diagnostics.Process.Start("http://lpse."+loc+".id/eproc4/evaluasi/"+ searchBox.Text + "/pemenang");
-        }
 
         //option graph
         private void graphOpt_Click(object sender, EventArgs e)
@@ -193,7 +161,14 @@ namespace LPSE_UGM_Winner_Parser
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start("readme.pdf");
+            try
+            {
+                System.Diagnostics.Process.Start("readme.pdf");
+            }
+            catch
+            {
+                MessageBox.Show("Error.");
+            }
         }
 
 
@@ -206,65 +181,121 @@ namespace LPSE_UGM_Winner_Parser
             }
             else
             {
-                string selectedData = graphLocBox.SelectedItem.ToString();
-
                 SaveFileDialog save = new SaveFileDialog();
                 save.Filter = "PDF|*.pdf|Gephi Graph|*.gexf";
                 if (save.ShowDialog() == DialogResult.OK)
                 {
+                    string selectedData = graphLocBox.SelectedItem.ToString();
+
                     string tmp2 = @"'\n'";
                     char tmp3 = '"';
                     save.FileName = save.FileName.Replace(@"\", @"\\");
 
-                    string source = Program.resource_path.Replace(@"\", @"\\");
-                    source += "cache\\";
+                    string source = Program.resource_path + @"cache\";
                     source += selectedData + ".csv";
+                    source = source.Replace(@"\", @"\\");
 
-                    //export graph
-                    string command = "SELECT pemenang.id_lelang ID, pemenang.npwp NPWP, pemenang_detail.nama_perusahaan Nama_Perusahaan, pengumuman.instansi Instansi INTO OUTFILE " + '"' + source + '"' + " FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '" + tmp3 + "' LINES TERMINATED BY " + tmp2 + " FROM pengumuman, pemenang, pemenang_detail WHERE pemenang.id_lelang = pengumuman.id_lelang AND pemenang.npwp = pemenang_detail.npwp;";
-                    using (MySqlConnection conn = new MySqlConnection(connect))
+                    string tmp_selected = '"' + selectedData + '"';
+                    string command_selected = "SELECT kode_lpse,link_lpse FROM daftar_lpse WHERE nama_lpse = " + tmp_selected;
+                    using (MySqlConnection conn_ = new MySqlConnection(connect))
                     {
-                        MySqlCommand cmd = new MySqlCommand(command, conn);
                         try
                         {
-                            conn.Open();
-                            cmd.ExecuteReader();
+                            conn_.Open();
 
-                            conn.Close();
+                            MySqlCommand cmd = new MySqlCommand(command_selected, conn_);
+                            MySqlDataReader read = cmd.ExecuteReader();
+
+                            while (read.Read())
+                            {
+                                kode_lpse = read.GetString("kode_lpse");
+                            }
+                            conn_.Close();
                         }
                         catch (MySqlException ex)
                         {
                             MessageBox.Show(ex.Message);
                         }
+
+                        //export graph
+                        string command = "SELECT pemenang.id_lelang ID, pemenang_detail.nama_perusahaan Nama_Perusahaan, pengumuman.instansi Instansi INTO OUTFILE " + '"' + source + '"' + " FIELDS TERMINATED BY ';' OPTIONALLY ENCLOSED BY '" + tmp3 + "' LINES TERMINATED BY " + tmp2 + " FROM pengumuman, pemenang, pemenang_detail WHERE pemenang.id_lelang = pengumuman.id_lelang AND pemenang.npwp = pemenang_detail.npwp AND pengumuman.id_lelang LIKE %" + kode_lpse;
+                        using (MySqlConnection conn = new MySqlConnection(connect))
+                        {
+                            MySqlCommand cmd = new MySqlCommand(command, conn);
+                            try
+                            {
+                                conn.Open();
+                                cmd.ExecuteReader();
+
+                                conn.Close();
+                            }
+                            catch (MySqlException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                        }
+
+                        if (colorMinBox.Text.StartsWith("0x") && colorMaxBox.Text.StartsWith("0x"))
+                        {
+                            //graph option section
+                            groupBox2.Enabled = false;
+                            groupBox3.Enabled = false;
+                            groupBox4.Enabled = false;
+                            groupBox5.Enabled = false;
+
+                            graphOpt.Enabled = false;
+                            button3.Enabled = false;
+                            createGraphBtn.Enabled = false;
+                            graphLocBox.Enabled = false;
+
+                            ProcessStartInfo start = new ProcessStartInfo("java.exe");
+                            start.Arguments = "-jar " + '"' + Program.resource_path + "LPSEGraph.jar" + '"' + " " + '"' + source + '"' + " " + '"' + save.FileName + '"' + " " + colorMinBox.Text + " " + colorMaxBox.Text + " " + nodeMinBox.Text + " " + nodeMaxBox.Text + " " + labelMinBox.Text + " " + labelMaxBox.Text + " " + timeBox.Text + " " + repulsionBox.Text;
+                            Console.WriteLine(start.Arguments);
+                            start.UseShellExecute = false;// Do not use OS shell
+                            start.CreateNoWindow = true;//no python window
+                            start.RedirectStandardOutput = true;// Any output, generated by application will be redirected back
+                            start.RedirectStandardError = true; // Any error in standard output will be redirected back (for example exceptions)
+
+                            Process process = new Process();
+                            process.StartInfo = start;
+
+                            process.Start();
+                            Console.WriteLine("Please wait.....");
+
+                            process.BeginOutputReadLine();
+                            process.BeginErrorReadLine();
+
+                            process.WaitForExit();
+
+                            //graph option section
+                            groupBox2.Enabled = true;
+                            groupBox3.Enabled = true;
+                            groupBox4.Enabled = true;
+                            groupBox5.Enabled = true;
+
+                            graphOpt.Enabled = true;
+                            button3.Enabled = true;
+                            createGraphBtn.Enabled = true;
+                            graphLocBox.Enabled = true;
+                            File.Delete(source);
+                            Console.WriteLine("Graph Done.");
+
+                            System.Diagnostics.Process.Start(save.FileName);
+                            // close the process 
+                            process.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
-
-                    ProcessStartInfo start = new ProcessStartInfo("java.exe");
-                    start.Arguments = Program.resource_path + "-jar LPSEGraph.jar" + " " + source + " " + save.FileName + " " + colorMinBox.Text + " " + colorMaxBox.Text + " " + nodeMinBox.Text + " " + nodeMaxBox.Text + " " + labelMinBox.Text + " " + labelMaxBox.Text + " " + timeBox.Text + " " + repulsionBox.Text;
-                    Console.WriteLine(start.Arguments);
-                    start.UseShellExecute = false;// Do not use OS shell
-                    start.CreateNoWindow = true;//no python window
-                    start.RedirectStandardOutput = true;// Any output, generated by application will be redirected back
-                    start.RedirectStandardError = true; // Any error in standard output will be redirected back (for example exceptions)
-
-                    Process process = new Process();
-                    process.StartInfo = start;
-
-                    process.Start();
-
-                    process.BeginOutputReadLine();
-                    process.BeginErrorReadLine();
-
-                    process.WaitForExit();
-
-                    // close the process 
-                    process.Close();
                 }
             }
         }
 
         private void importSampleDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+                MessageBox.Show("not yet");
         }
 
         //sort data
@@ -307,7 +338,55 @@ namespace LPSE_UGM_Winner_Parser
 
         private void rldBtn_Click(object sender, EventArgs e)
         {
-            getData_Leaderboard();
+            getData_Leaderboard(10);
+        }
+
+        //reset graph settings
+        private void button3_Click(object sender, EventArgs e)
+        {
+            colorMinBox.Text = "0xFFC0D9";
+            colorMaxBox.Text = "0xAAAAFF";
+            nodeMinBox.Text = "0.8";
+            nodeMaxBox.Text = "3";
+            labelMinBox.Text = "0.6";
+            labelMaxBox.Text = "3";
+            timeBox.Text = "120";
+            repulsionBox.Text = "2000";
+        }
+
+        private void limitLeaderboardBtn_Click(object sender, EventArgs e)
+        {
+            int tmp;
+            if (!Int32.TryParse(limitLeaderboardBox.Text, out tmp))
+            {
+                MessageBox.Show("Invalid input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                string command = "SELECT pemenang_detail.nama_perusahaan Nama_Perusahaan, count(*) Jumlah FROM pemenang,pemenang_detail WHERE pemenang_detail.npwp = pemenang.npwp GROUP BY pemenang_detail.nama_perusahaan ORDER BY count(*) desc limit " + Int32.Parse(limitLeaderboardBox.Text);
+                using (MySqlConnection conn = new MySqlConnection(connect))
+                {
+                    MySqlCommand cmd = new MySqlCommand(command, conn);
+                    try
+                    {
+                        conn.Open();
+                        MySqlDataReader read = cmd.ExecuteReader();
+                        dt.Load(read);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            dataLeaderboard.DataSource = dt;
+                        }
+
+                        conn.Close();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
         }
     }
 }
