@@ -10,7 +10,7 @@ namespace LPSE_UGM_Winner_Parser
     static class Program
     {
         public static string server, port, user, pass, db;
-        public static string resource_path = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + @"\Resources\";
+        public static string resource_path = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + @"\Resources\\";
         
         /// <summary>
         /// The main entry point for the application.
