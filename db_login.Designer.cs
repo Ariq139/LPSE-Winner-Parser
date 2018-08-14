@@ -107,7 +107,7 @@
             // 
             this.portBox.Location = new System.Drawing.Point(150, 25);
             this.portBox.Name = "portBox";
-            this.portBox.Size = new System.Drawing.Size(52, 20);
+            this.portBox.Size = new System.Drawing.Size(46, 20);
             this.portBox.TabIndex = 25;
             this.portBox.Text = "3306";
             // 
@@ -143,7 +143,7 @@
             this.createBtn.Name = "createBtn";
             this.createBtn.Size = new System.Drawing.Size(181, 36);
             this.createBtn.TabIndex = 33;
-            this.createBtn.Text = "Create";
+            this.createBtn.Text = "Create Database";
             this.createBtn.UseVisualStyleBackColor = true;
             this.createBtn.Click += new System.EventHandler(this.createBtn_Click_1);
             // 
