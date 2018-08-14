@@ -376,16 +376,28 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
                 
     if linkGet:
             
-        length = len(soup.find_all('th'))
+        length_th = len(soup.find_all('th'))
+        length_td = len(soup.find_all('td'))
             
-        if length > 0:
-            for tmp in range(0, length):
-                if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    npwp = soup.find_all('td')[tmp+1].get_text()
-                    result_pemenang = [kode_lelang, npwp]
-                    
-                    return result_pemenang
-                    break
+        if length_th > 0:
+            if length_th == length_td:
+                for tmp in range(0, length_th):
+                    if soup.find_all('th')[tmp].get_text() == "NPWP":
+                        npwp = soup.find_all('td')[tmp].get_text()
+                        result_pemenang = [kode_lelang, npwp]
+                        
+                        print("(", kode_lelang, ") Data from Pemenang retrieved.")
+                        return result_pemenang
+                        break
+            else:
+                for tmp in range(0, length_th):
+                    if soup.find_all('th')[tmp].get_text() == "NPWP":
+                        npwp = soup.find_all('td')[tmp+1].get_text()
+                        result_pemenang = [kode_lelang, npwp]
+                        
+                        print("(", kode_lelang, ") Data from Pemenang retrieved.")
+                        return result_pemenang
+                        break
         else:
             for j in range(0, retry_limit): 
                 try:
@@ -406,15 +418,25 @@ def getData_Pemenang(retry_limit, link, kode_lelang):
                     
                 length = len(soup.find_all('th'))
             
-                if length > 0:
-                    for tmp in range(0, len(soup.find_all('th'))):
-                        if soup.find_all('th')[tmp].get_text() == "NPWP":
-                            nama = soup.find_all('td')[tmp+1].get_text() 
-                            result_pemenang = [kode_lelang, npwp]
-                            break
-
-                    print("(", kode_lelang, ") Data from Pemenang retrieved.")
-                    return result_pemenang
+                if length_th > 0:
+                    if length_th == length_td:
+                        for tmp in range(0, length_th):
+                            if soup.find_all('th')[tmp].get_text() == "NPWP":
+                                npwp = soup.find_all('td')[tmp].get_text()
+                                result_pemenang = [kode_lelang, npwp]
+                    
+                                print("(", kode_lelang, ") Data from Pemenang retrieved.")
+                                return result_pemenang
+                                break
+                    else:
+                        for tmp in range(0, length_th):
+                            if soup.find_all('th')[tmp].get_text() == "NPWP":
+                                npwp = soup.find_all('td')[tmp+1].get_text()
+                                result_pemenang = [kode_lelang, npwp]
+                    
+                                print("(", kode_lelang, ") Data from Pemenang retrieved.")
+                                return result_pemenang
+                                break
                             
                 else:
                     return "no data"
@@ -443,25 +465,45 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
                 
     if linkGet:
             
-        length = len(soup.find_all('th'))
+        length_th = len(soup.find_all('th'))
+        length_td = len(soup.find_all('td'))
             
-        if length > 0:
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "NPWP":
-                    npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+        if length_th > 0:
+            if length_td == length_th:
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "NPWP":
+                        npwp = soup.find_all('td')[tmp].get_text() 
+                        break
             
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
-                    nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                        nama = soup.find_all('td')[tmp].get_text() 
+                        break
             
-            for tmp in range(0, len(soup.find_all('th'))):
-                if soup.find_all('th')[tmp].get_text() == "Alamat":
-                    alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                    break
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "Alamat":
+                        alamat = soup.find_all('td')[tmp].get_text() 
+                        break
             
-            result_pemenangdetail = [npwp, nama, alamat]
+                result_pemenangdetail = [npwp, nama, alamat]
+            
+            else:
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "NPWP":
+                        npwp = soup.find_all('td')[tmp+1].get_text() 
+                        break
+            
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                        nama = soup.find_all('td')[tmp+1].get_text() 
+                        break
+            
+                for tmp in range(0, len(soup.find_all('th'))):
+                    if soup.find_all('th')[tmp].get_text() == "Alamat":
+                        alamat = soup.find_all('td')[tmp+1].get_text() 
+                        break
+            
+                result_pemenangdetail = [npwp, nama, alamat]
             
             print("(", kode_lelang, ") Data from Pemenang (detail) retrieved.")
             return result_pemenangdetail
@@ -483,25 +525,48 @@ def getData_PemenangDetail(retry_limit, link, kode_lelang):
                 
             if linkGet_:
                     
-                length = len(soup.find_all('th'))
+                length_th = len(soup.find_all('th'))
+                length_td = len(soup.find_all('td'))
             
-                if length > 0:
-                    for tmp in range(0, length):
-                        if soup.find_all('th')[tmp].get_text() == "NPWP":
-                            npwp = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                            break
+                if length_th > 0:
+                    if length_td == length_th:
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "NPWP":
+                                npwp = soup.find_all('td')[tmp].get_text() 
+                                break
             
-                    for tmp in range(0, length):
-                        if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
-                            nama = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                            break
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                                nama = soup.find_all('td')[tmp].get_text() 
+                                break
             
-                    for tmp in range(0, length):
-                        if soup.find_all('th')[tmp].get_text() == "Alamat":
-                            alamat = soup.find_all('td')[tmp+1].get_text() #inkonsisten?
-                            break
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "Alamat":
+                                alamat = soup.find_all('td')[tmp].get_text()
+                                break
             
-                    result_pemenangdetail = [npwp, nama, alamat]
+                        result_pemenangdetail = [npwp, nama, alamat]
+            
+                    else:
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "NPWP":
+                                npwp = soup.find_all('td')[tmp+1].get_text()
+                                break
+            
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "Nama Pemenang":
+                                nama = soup.find_all('td')[tmp+1].get_text()
+                                break
+            
+                        for tmp in range(0, len(soup.find_all('th'))):
+                            if soup.find_all('th')[tmp].get_text() == "Alamat":
+                                alamat = soup.find_all('td')[tmp+1].get_text()
+                                break
+            
+                        result_pemenangdetail = [npwp, nama, alamat]
+            
+                    print("(", kode_lelang, ") Data from Pemenang (detail) retrieved.")
+                    return result_pemenangdetail
             
                 else:
                     return "no data"

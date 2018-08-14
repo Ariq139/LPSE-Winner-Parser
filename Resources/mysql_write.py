@@ -27,6 +27,7 @@ def insertData_Pengumuman(cnx, result_pengumuman):
     cursor = cnx.cursor()
     
     add_entry = ("INSERT INTO pengumuman (`id_lelang`, `nama_lelang`, `tgl_buat`, `tahap`, `instansi`, `satker`, `kategori`, `thn_anggaran`, `pagu`, `hps`, `jml_peserta`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+    
     entry_data = (result_pengumuman[0], result_pengumuman[1], result_pengumuman[2], result_pengumuman[3], result_pengumuman[4], result_pengumuman[5], result_pengumuman[6], result_pengumuman[7], result_pengumuman[8], result_pengumuman[9], result_pengumuman[10]) #kode_lelang, nama, tgl_buat, tahap, instansi, satker, kategori, thn_angg, pagu, hps, kualifikasi, jml_peserta
     
     try:
@@ -37,8 +38,18 @@ def insertData_Pengumuman(cnx, result_pengumuman):
         
     except mysql.connector.Error as err:
             if err.errno == 1062: #duplicate primary
-                print("( Pengumuman ) Data already in database. Skipping...")
-                pass #biarkan
+                add_entry = ("REPLACE INTO pengumuman (`id_lelang`, `nama_lelang`, `tgl_buat`, `tahap`, `instansi`, `satker`, `kategori`, `thn_anggaran`, `pagu`, `hps`, `jml_peserta`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                
+                entry_data = (result_pengumuman[0], result_pengumuman[1], result_pengumuman[2], result_pengumuman[3], result_pengumuman[4], result_pengumuman[5], result_pengumuman[6], result_pengumuman[7], result_pengumuman[8], result_pengumuman[9], result_pengumuman[10])
+                
+                try:
+                    cursor.execute(add_entry, entry_data)
+                    cnx.commit()
+        
+                    print("(", result_pengumuman[0], ") Data from Pengumuman replaced.")
+        
+                except mysql.connector.Error as err:
+                    print("( Pengumuman ) Error ", err.errno)
             else:
                 print("( Pengumuman ) Error ", err.errno)
      

@@ -153,7 +153,7 @@
             this.Controls.Add(this.startBox);
             this.Controls.Add(this.label1);
             this.Name = "crawler";
-            this.Text = "crawler";
+            this.Text = "Crawler";
             this.Load += new System.EventHandler(this.crawler_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

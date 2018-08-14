@@ -37,19 +37,30 @@ namespace LPSE_UGM_Winner_Parser
         //start script python
         private void startScript_Click(object sender, EventArgs e)
         {
-            startScript.Enabled = false;
-            locCombo.Enabled = false;
-            startBox.Enabled = false;
-            endBox.Enabled = false;
-            retryBox.Enabled = false;
+            int tmp_parse;
 
             DialogResult result = MessageBox.Show("This process can take a long time. Continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
+                startScript.Enabled = false;
+                locCombo.Enabled = false;
+                startBox.Enabled = false;
+                endBox.Enabled = false;
+                retryBox.Enabled = false;
+                button2.Enabled = false;
+
                 if (startBox.Text == "" || endBox.Text == "" || retryBox.Text == "")
                 {
                     MessageBox.Show("Please fill in the box.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (!(int.TryParse(startBox.Text, out tmp_parse)) || !(int.TryParse(endBox.Text, out tmp_parse)) || !(int.TryParse(retryBox.Text, out tmp_parse)))
+                {
+                    MessageBox.Show("Invalid input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (Convert.ToInt32(startBox.Text) > Convert.ToInt32(endBox.Text))
+                {
+                    MessageBox.Show("Invalid input.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -102,6 +113,7 @@ namespace LPSE_UGM_Winner_Parser
                     startBox.Enabled = true;
                     endBox.Enabled = true;
                     retryBox.Enabled = true;
+                    button2.Enabled = true;
 
                     // close the process 
                     process.Close();
