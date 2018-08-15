@@ -40,7 +40,7 @@ Max. Retry = 3
 ### NOTE
 1. Repulsion adalah kekuatan node menjauhi node lain yang tidak terhubung
 2. Waktu lebih banyak + repulsion tinggi = Makin jauh jarak antar node yang tidak berhubungan
-3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB, contoh: `255,0,0 diubah menjadi 0xFF0000`
+3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB, contoh: `255,0,0` diubah menjadi `0xFF0000`
 
 ## EXTRA NOTE
 1. Source code untuk pemroses graph bisa diakses [disini](https://github.com/Ariq139/LPSE-Graph).
