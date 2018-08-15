@@ -34,7 +34,6 @@ NOTE
 2. Console tidak sepenuhnya terupdate real time
 3. Tidak ada data Evaluasi, karena terlalu inkonsisten
 4. Jika internet terlalu lambat, script akan hang tanpa error. Salah satu caranya adalah dengan restart aplikasi, karena sulit didebug.
-5. Ada sample data yang tersedia untuk contoh, dengan pilih Data, lalu Import sample data
 /////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////
