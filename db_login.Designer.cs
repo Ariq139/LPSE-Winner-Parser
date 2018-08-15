@@ -49,7 +49,6 @@
             this.dbBox.Name = "dbBox";
             this.dbBox.Size = new System.Drawing.Size(181, 20);
             this.dbBox.TabIndex = 32;
-            this.dbBox.Text = "pkl_v2";
             // 
             // label5
             // 

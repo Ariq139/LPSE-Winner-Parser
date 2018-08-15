@@ -54,18 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="aboutBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="aboutBox.Designer.cs">
-      <DependentUpon>aboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="add_manual.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="add_manual.Designer.cs">
-      <DependentUpon>add_manual.cs</DependentUpon>
-    </Compile>
     <Compile Include="crawler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,12 +80,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="aboutBox.resx">
-      <DependentUpon>aboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="add_manual.resx">
-      <DependentUpon>add_manual.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="crawler.resx">
       <DependentUpon>crawler.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,22 +121,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\first_run.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\first_run_fill_data.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\google_spreadsheet_update.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\google_spreadsheet_update_dummy.py">
+    <Content Include="README.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\lib\gephi-toolkit-0.9.2-all.jar">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\loop_test.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\LPSEGraph.jar">
@@ -163,21 +133,10 @@
     <Content Include="Resources\mysql_write.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\sheet_write.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\updatecheck.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\updatecheck_v2.py">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\winner_get.py">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\cache\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
