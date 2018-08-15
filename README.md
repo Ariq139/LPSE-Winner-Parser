@@ -11,7 +11,7 @@
    - [Gephi Toolkit](https://gephi.org/toolkit/) (Tempatkan di Resources/lib)
 7. Internet kencang (Untuk Crawler)
 
-## Cara memasukkan data ke database dengan Crawler
+## Using the Crawler
 1. Login ke database. Jika belum ada, masukkan nama database dan klik Create
 2. Klik Data di kiri atas, lalu Crawler
 3. Pilih LPSE, start point, end point, dan retry
@@ -31,7 +31,7 @@ Max. Retry = 3
 3. Tidak ada data Evaluasi, karena terlalu inkonsisten
 4. Jika internet terlalu lambat, script akan hang tanpa error. Salah satu caranya adalah dengan restart aplikasi, karena sulit didebug.
 
-## Cara export graph dari data
+## Graph Exporting
 1. Pilih tab Graph/Network
 2. Pilih sumber data. Pilihan Leaderboard adalah pilihan untuk membuat graph dari Leaderboard di bagian kanan aplikasi
 3. Ganti option bila perlu
@@ -41,3 +41,6 @@ Max. Retry = 3
 1. Repulsion adalah kekuatan node menjauhi node lain yang tidak terhubung
 2. Waktu lebih banyak + repulsion tinggi = Makin jauh jarak antar node yang tidak berhubungan
 3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB, contoh: `255,0,0 diubah menjadi 0xFF0000`
+
+## EXTRA NOTE
+1. Source code untuk pemroses graph bisa diakses [disini](https://github.com/Ariq139/LPSE-Graph).
