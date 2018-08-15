@@ -1,7 +1,7 @@
 # LPSE Winner Parser
 ## Development Requirement
 1. Visual Studio 2017
-2. Python 3.7
+2. [Python 3.7](https://www.python.org/downloads/release/python-370/)
    - BeautifulSoup4 `py -3.7 -m pip install beautifulsoup4`
    - MySQL Connector `py -3.7 -m pip install mysql-connector-python`
 3. .NET Framework 4.7
