@@ -37,7 +37,6 @@
             this.topGraph = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importSampleDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disconnectFromDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -172,31 +171,23 @@
             // databaseToolStripMenuItem
             // 
             this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importSampleDataToolStripMenuItem,
             this.dataToolStripMenuItem,
             this.disconnectFromDatabaseToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
             this.databaseToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.databaseToolStripMenuItem.Text = "Data";
             // 
-            // importSampleDataToolStripMenuItem
-            // 
-            this.importSampleDataToolStripMenuItem.Name = "importSampleDataToolStripMenuItem";
-            this.importSampleDataToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.importSampleDataToolStripMenuItem.Text = "Import sample data";
-            this.importSampleDataToolStripMenuItem.Click += new System.EventHandler(this.importSampleDataToolStripMenuItem_Click);
-            // 
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dataToolStripMenuItem.Text = "Crawler";
             this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
             // 
             // disconnectFromDatabaseToolStripMenuItem
             // 
             this.disconnectFromDatabaseToolStripMenuItem.Name = "disconnectFromDatabaseToolStripMenuItem";
-            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.disconnectFromDatabaseToolStripMenuItem.Text = "Disconnect";
             this.disconnectFromDatabaseToolStripMenuItem.Click += new System.EventHandler(this.disconnectFromDatabaseToolStripMenuItem_Click);
             // 
@@ -615,7 +606,6 @@
         private System.Windows.Forms.ComboBox graphLocBox;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importSampleDataToolStripMenuItem;
         private System.Windows.Forms.Button rldBtn;
         private System.Windows.Forms.Button idGet;
         private System.Windows.Forms.TextBox searchBox;

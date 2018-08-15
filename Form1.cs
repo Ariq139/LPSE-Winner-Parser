@@ -358,14 +358,6 @@ namespace LPSE_UGM_Winner_Parser
             }
         }
 
-        private void importSampleDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Please input the password in the next cmd window.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            string strCmdText;
-            strCmdText = "/C mysql -u " + Program.user + " -p " + Program.pass + " " + Program.db + " < " + Program.resource_path + "sample.sql";
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
-        }
-
         private void rldBtn_Click(object sender, EventArgs e)
         {
             getData_Leaderboard(10);
