@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.limitLeaderboardBtn = new System.Windows.Forms.Button();
             this.rldBtn = new System.Windows.Forms.Button();
+            this.limitLeaderboardBox = new System.Windows.Forms.TextBox();
             this.dataLeaderboard = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
             this.topGraph = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,9 +45,6 @@
             this.idGet = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.sortBox = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.dataLelang = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.searchIDTab = new System.Windows.Forms.TabControl();
@@ -74,9 +74,6 @@
             this.graphOpt = new System.Windows.Forms.Button();
             this.createGraphBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.limitLeaderboardBtn = new System.Windows.Forms.Button();
-            this.limitLeaderboardBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -105,6 +102,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Leaderboard";
             // 
+            // limitLeaderboardBtn
+            // 
+            this.limitLeaderboardBtn.Location = new System.Drawing.Point(84, 34);
+            this.limitLeaderboardBtn.Name = "limitLeaderboardBtn";
+            this.limitLeaderboardBtn.Size = new System.Drawing.Size(52, 23);
+            this.limitLeaderboardBtn.TabIndex = 24;
+            this.limitLeaderboardBtn.Text = "Go";
+            this.limitLeaderboardBtn.UseVisualStyleBackColor = true;
+            this.limitLeaderboardBtn.Click += new System.EventHandler(this.limitLeaderboardBtn_Click);
+            // 
             // rldBtn
             // 
             this.rldBtn.Location = new System.Drawing.Point(7, 303);
@@ -115,6 +122,14 @@
             this.rldBtn.UseVisualStyleBackColor = true;
             this.rldBtn.Click += new System.EventHandler(this.rldBtn_Click);
             // 
+            // limitLeaderboardBox
+            // 
+            this.limitLeaderboardBox.Location = new System.Drawing.Point(9, 36);
+            this.limitLeaderboardBox.Name = "limitLeaderboardBox";
+            this.limitLeaderboardBox.Size = new System.Drawing.Size(69, 20);
+            this.limitLeaderboardBox.TabIndex = 23;
+            this.limitLeaderboardBox.Text = "10";
+            // 
             // dataLeaderboard
             // 
             this.dataLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
@@ -123,6 +138,15 @@
             this.dataLeaderboard.Name = "dataLeaderboard";
             this.dataLeaderboard.Size = new System.Drawing.Size(223, 235);
             this.dataLeaderboard.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 20);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Limit";
             // 
             // topGraph
             // 
@@ -188,9 +212,6 @@
             this.overviewTab.Controls.Add(this.idGet);
             this.overviewTab.Controls.Add(this.searchBox);
             this.overviewTab.Controls.Add(this.label16);
-            this.overviewTab.Controls.Add(this.label1);
-            this.overviewTab.Controls.Add(this.sortBox);
-            this.overviewTab.Controls.Add(this.button1);
             this.overviewTab.Controls.Add(this.dataLelang);
             this.overviewTab.Controls.Add(this.label3);
             this.overviewTab.Location = new System.Drawing.Point(4, 22);
@@ -203,7 +224,7 @@
             // 
             // idGet
             // 
-            this.idGet.Location = new System.Drawing.Point(392, 27);
+            this.idGet.Location = new System.Drawing.Point(112, 25);
             this.idGet.Name = "idGet";
             this.idGet.Size = new System.Drawing.Size(75, 23);
             this.idGet.TabIndex = 21;
@@ -213,7 +234,7 @@
             // 
             // searchBox
             // 
-            this.searchBox.Location = new System.Drawing.Point(286, 28);
+            this.searchBox.Location = new System.Drawing.Point(6, 26);
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(100, 20);
             this.searchBox.TabIndex = 20;
@@ -221,45 +242,11 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(283, 12);
+            this.label16.Location = new System.Drawing.Point(3, 10);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(55, 13);
             this.label16.TabIndex = 19;
             this.label16.Text = "Search ID";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Order by:";
-            // 
-            // sortBox
-            // 
-            this.sortBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sortBox.FormattingEnabled = true;
-            this.sortBox.Items.AddRange(new object[] {
-            "None",
-            "id_lelang",
-            "nama_lelang",
-            "tahap",
-            "kategori"});
-            this.sortBox.Location = new System.Drawing.Point(6, 27);
-            this.sortBox.Name = "sortBox";
-            this.sortBox.Size = new System.Drawing.Size(152, 21);
-            this.sortBox.TabIndex = 17;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(164, 26);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Show";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataLelang
             // 
@@ -553,33 +540,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Data";
             // 
-            // limitLeaderboardBtn
-            // 
-            this.limitLeaderboardBtn.Location = new System.Drawing.Point(84, 34);
-            this.limitLeaderboardBtn.Name = "limitLeaderboardBtn";
-            this.limitLeaderboardBtn.Size = new System.Drawing.Size(52, 23);
-            this.limitLeaderboardBtn.TabIndex = 24;
-            this.limitLeaderboardBtn.Text = "Go";
-            this.limitLeaderboardBtn.UseVisualStyleBackColor = true;
-            this.limitLeaderboardBtn.Click += new System.EventHandler(this.limitLeaderboardBtn_Click);
-            // 
-            // limitLeaderboardBox
-            // 
-            this.limitLeaderboardBox.Location = new System.Drawing.Point(9, 36);
-            this.limitLeaderboardBox.Name = "limitLeaderboardBox";
-            this.limitLeaderboardBox.Size = new System.Drawing.Size(69, 20);
-            this.limitLeaderboardBox.TabIndex = 23;
-            this.limitLeaderboardBox.Text = "10";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(28, 13);
-            this.label4.TabIndex = 22;
-            this.label4.Text = "Limit";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -656,9 +616,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importSampleDataToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox sortBox;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button rldBtn;
         private System.Windows.Forms.Button idGet;
         private System.Windows.Forms.TextBox searchBox;
