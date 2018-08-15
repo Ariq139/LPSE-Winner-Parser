@@ -156,32 +156,37 @@ namespace LPSE_UGM_Winner_Parser
             portBox.Text = "3306";
             userBox.Text = "root";
             passBox.Text = "";
-            dbBox.Text = "pkl_v2";
         }
 
         //login to existing db
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            Program.server = srvBox.Text;
-            Program.port = portBox.Text;
-            Program.user = userBox.Text;
-            Program.pass = passBox.Text;
-            Program.db = dbBox.Text;
-
-            using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
+            if (srvBox.Text == "" || portBox.Text == "" || userBox.Text == "" || dbBox.Text == "")
             {
-                try
-                {
-                    conn.Open();
-                    conn.Close();
-                    this.Hide();
-                    new Form1().ShowDialog();
-                    this.Close();
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show(ex.Message);
+                MessageBox.Show("Please fill in the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                Program.server = srvBox.Text;
+                Program.port = portBox.Text;
+                Program.user = userBox.Text;
+                Program.pass = passBox.Text;
+                Program.db = dbBox.Text;
 
+                using (MySqlConnection conn = new MySqlConnection("server=" + srvBox.Text + ";port=" + portBox.Text + ";user=" + userBox.Text + ";password=" + passBox.Text + ";database=" + dbBox.Text + ";"))
+                {
+                    try
+                    {
+                        conn.Open();
+                        conn.Close();
+                        this.Hide();
+                        new Form1().ShowDialog();
+                        this.Close();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        MessageBox.Show(ex.Message + "test");
+                    }
                 }
             }
         }

@@ -73,6 +73,7 @@
             this.graphOpt = new System.Windows.Forms.Button();
             this.createGraphBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.noticeLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataLeaderboard)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -180,14 +181,14 @@
             // dataToolStripMenuItem
             // 
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
-            this.dataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dataToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.dataToolStripMenuItem.Text = "Crawler";
             this.dataToolStripMenuItem.Click += new System.EventHandler(this.dataToolStripMenuItem_Click);
             // 
             // disconnectFromDatabaseToolStripMenuItem
             // 
             this.disconnectFromDatabaseToolStripMenuItem.Name = "disconnectFromDatabaseToolStripMenuItem";
-            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disconnectFromDatabaseToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.disconnectFromDatabaseToolStripMenuItem.Text = "Disconnect";
             this.disconnectFromDatabaseToolStripMenuItem.Click += new System.EventHandler(this.disconnectFromDatabaseToolStripMenuItem_Click);
             // 
@@ -269,6 +270,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.noticeLabel);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.graphLocBox);
             this.tabPage1.Controls.Add(this.groupBox5);
@@ -313,6 +315,7 @@
             this.graphLocBox.Name = "graphLocBox";
             this.graphLocBox.Size = new System.Drawing.Size(251, 21);
             this.graphLocBox.TabIndex = 15;
+            this.graphLocBox.SelectedIndexChanged += new System.EventHandler(this.graphLocBox_SelectedIndexChanged);
             // 
             // groupBox5
             // 
@@ -531,6 +534,16 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Data";
             // 
+            // noticeLabel
+            // 
+            this.noticeLabel.AutoSize = true;
+            this.noticeLabel.Location = new System.Drawing.Point(7, 52);
+            this.noticeLabel.Name = "noticeLabel";
+            this.noticeLabel.Size = new System.Drawing.Size(157, 13);
+            this.noticeLabel.TabIndex = 17;
+            this.noticeLabel.Text = "WARNING: Big Data expected.";
+            this.noticeLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -539,6 +552,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.searchIDTab);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "LPSE Winner Parser";
@@ -613,6 +627,7 @@
         private System.Windows.Forms.Button limitLeaderboardBtn;
         private System.Windows.Forms.TextBox limitLeaderboardBox;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label noticeLabel;
     }
 }
 

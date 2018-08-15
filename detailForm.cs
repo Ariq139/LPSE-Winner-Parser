@@ -39,7 +39,7 @@ namespace LPSE_UGM_Winner_Parser
         {
             DataTable dt = new DataTable();
             string connect = "server=" + Program.server + ";port=" + Program.port + ";user=" + Program.user + ";password=" + Program.pass + ";database=" + Program.db + ";";
-            string command = "SELECT pengumuman.*, pemenang_detail.nama_perusahaan, pemenang_detail.npwp FROM pengumuman, pemenang, pemenang_detail WHERE pengumuman.id_lelang = pemenang.id_lelang AND pemenang.npwp = pemenang_detail.npwp AND pemenang_detail.nama_perusahaan IN (SELECT pemenang_detail.nama_perusahaan Nama_Perusahaan, count(*) Jumlah FROM pemenang,pemenang_detail WHERE pemenang_detail.npwp = pemenang.npwp GROUP BY pemenang_detail.nama_perusahaan desc limit 10)";
+            string command = "SELECT pengumuman.id_lelang, pengumuman.nama_lelang, pengumuman.instansi, pemenang_detail.nama_perusahaan FROM pengumuman, pemenang, pemenang_detail WHERE pengumuman.id_lelang = pemenang.id_lelang AND pemenang.npwp = pemenang_detail.npwp AND pemenang_detail.nama_perusahaan IN (SELECT pemenang_detail.nama_perusahaan FROM pemenang,pemenang_detail WHERE pemenang_detail.npwp = pemenang.npwp GROUP BY pemenang_detail.nama_perusahaan ORDER BY count(*) DESC)";
             using (MySqlConnection conn = new MySqlConnection(connect))
             {
                 MySqlCommand cmd = new MySqlCommand(command, conn);
