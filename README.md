@@ -1,14 +1,15 @@
 # LPSE Winner Parser
-## Runtime Requirement
-1. Python 3.7
+## Development Requirement
+1. Visual Studio 2017
+2. Python 3.7
    - BeautifulSoup4 `py -3.7 -m pip install beautifulsoup4`
    - MySQL Connector `py -3.7 -m pip install mysql-connector-python`
-2. .NET Framework 4.7
-3. XAMPP + MySQL / DB MySQL
-4. [Java 8](https://java.com/en/download/)
-5. [Gephi](https://gephi.org/users/download/) (Untuk format .gexf)
+3. .NET Framework 4.7
+4. XAMPP + MySQL / DB MySQL
+5. [Java 8](https://java.com/en/download/)
+6. [Gephi](https://gephi.org/users/download/) (Untuk format .gexf)
    - [Gephi Toolkit](https://gephi.org/toolkit/) (Tempatkan di Resources/lib)
-6. Internet kencang (Untuk Crawler)
+7. Internet kencang (Untuk Crawler)
 
 ## Cara memasukkan data ke database dengan Crawler
 1. Login ke database. Jika belum ada, masukkan nama database dan klik Create
