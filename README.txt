@@ -1,12 +1,17 @@
-Requirements
-1. Python 3.7
-    a. BeautifulSoup4 (py -3.7 -m pip install beautifulsoup4)
-    b. MySQL Connector (py -3.7 -m pip install mysql-connector-python)
-2. .NET Framework 4.7
-3. XAMPP + MySQL / DB MySQL
-4. Java 8
-5. Gephi (Untuk format .gexf)
-6. Internet kencang (Untuk Crawler)
+/////////////////////////////////////////////////////////////////
+Development Requirement
+
+1. Visual Studio 2017
+2. Python 3.7
+   - BeautifulSoup4 `py -3.7 -m pip install beautifulsoup4`
+   - MySQL Connector `py -3.7 -m pip install mysql-connector-python`
+3. .NET Framework 4.7
+4. XAMPP + MySQL / DB MySQL
+5. [Java 8](https://java.com/en/download/)
+6. [Gephi](https://gephi.org/users/download/) (Untuk format .gexf)
+   - [Gephi Toolkit](https://gephi.org/toolkit/) (Tempatkan di Resources/lib)
+7. Internet kencang (Untuk Crawler)
+/////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////
 Cara memasukkan data ke database dengan Crawler
@@ -15,7 +20,8 @@ Cara memasukkan data ke database dengan Crawler
 2. Klik Data di kiri atas, lalu Crawler
 3. Pilih LPSE, start point, end point, dan retry
 
-CONTOH:
+CONTOH
+
 Tempat = LPSE Universitas Gadjah Mada
 Start Point = 1
 End Point = 1200
@@ -23,7 +29,7 @@ Max. Retry = 3
 
 Artinya, ambil data dari website LPSE UGM, dari ID 1303 sampai 1200303, kalau ada masalah saat mencoba connect ke website, ulang sampai 3 kali.
 
-Note:
+NOTE
 1. Jika ada error 500/403/404 di console, tolong diabaikan
 2. Console tidak sepenuhnya terupdate real time
 3. Tidak ada data Evaluasi, karena terlalu inkonsisten
@@ -37,12 +43,10 @@ Cara export graph dari data
 1. Pilih tab Graph/Network
 2. Pilih sumber data. Pilihan Leaderboard adalah pilihan untuk membuat graph dari Leaderboard di bagian kanan aplikasi
 3. Ganti option bila perlu
-4. Klik
+4. Klik "Start"
 
-Note:
+NOTE
 1. Repulsion adalah kekuatan node menjauhi node lain yang tidak terhubung
 2. Waktu lebih banyak + repulsion tinggi = Makin jauh jarak antar node yang tidak berhubungan
-3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB 
-CONTOH: 
-255,0,0 diubah menjadi 0xFF0000
+3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB, contoh: `255,0,0 diubah menjadi 0xFF0000`
 /////////////////////////////////////////////////////////////////
