@@ -29,3 +29,16 @@ Max. Retry = 3
 3. Tidak ada data Evaluasi, karena terlalu inkonsisten
 4. Jika internet terlalu lambat, script akan hang tanpa error. Salah satu caranya adalah dengan restart aplikasi, karena sulit didebug.
 5. Ada sample data yang tersedia untuk contoh, dengan pilih Data, lalu Import sample data
+
+## Cara export graph dari data
+1. Pilih tab Graph/Network
+2. Pilih sumber data. Pilihan Leaderboard adalah pilihan untuk membuat graph dari Leaderboard di bagian kanan aplikasi
+3. Ganti option bila perlu
+4. Klik "Start"
+
+### NOTE
+1. Repulsion adalah kekuatan node menjauhi node lain yang tidak terhubung
+2. Waktu lebih banyak + repulsion tinggi = Makin jauh jarak antar node yang tidak berhubungan
+3. Color harus dalam bentuk hex dengan tambahan "0x" dan pakai format RGB 
+CONTOH: 
+`255,0,0 diubah menjadi 0xFF0000`
