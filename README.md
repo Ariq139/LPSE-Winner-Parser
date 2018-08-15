@@ -1,4 +1,5 @@
 # LPSE Winner Parser
+![Halaman utama program](https://media.discordapp.net/attachments/359734801449746434/479213149690527745/Capture.PNG)
 ## Development Requirement
 1. Visual Studio 2017
 2. [Python 3.7](https://www.python.org/downloads/release/python-370/)
