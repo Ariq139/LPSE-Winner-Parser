@@ -5,8 +5,9 @@
    - MySQL Connector `py -3.7 -m pip install mysql-connector-python`
 2. .NET Framework 4.7
 3. XAMPP + MySQL / DB MySQL
-4. Java 8
-5. Gephi (Untuk format .gexf)
+4. [Java 8](https://java.com/en/download/)
+5. [Gephi](https://gephi.org/users/download/) (Untuk format .gexf)
+   - [Gephi Toolkit](https://gephi.org/toolkit/) (Tempatkan di Resources/lib)
 6. Internet kencang (Untuk Crawler)
 
 ## Cara memasukkan data ke database dengan Crawler
