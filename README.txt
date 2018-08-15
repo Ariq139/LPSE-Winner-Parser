@@ -3,13 +3,13 @@ Development Requirement
 
 1. Visual Studio 2017
 2. Python 3.7
-   - BeautifulSoup4 `py -3.7 -m pip install beautifulsoup4`
-   - MySQL Connector `py -3.7 -m pip install mysql-connector-python`
+   - BeautifulSoup4 (py -3.7 -m pip install beautifulsoup4)
+   - MySQL Connector (py -3.7 -m pip install mysql-connector-python)
 3. .NET Framework 4.7
 4. XAMPP + MySQL / DB MySQL
-5. [Java 8](https://java.com/en/download/)
-6. [Gephi](https://gephi.org/users/download/) (Untuk format .gexf)
-   - [Gephi Toolkit](https://gephi.org/toolkit/) (Tempatkan di Resources/lib)
+5. Java 8
+6. Gephi (Untuk format .gexf)
+   - Gephi Toolkit (Tempatkan di Resources/lib)
 7. Internet kencang (Untuk Crawler)
 /////////////////////////////////////////////////////////////////
 
@@ -34,7 +34,7 @@ NOTE
 3. Console tidak sepenuhnya terupdate real time.
 4. Tidak ada data Evaluasi, karena terlalu inkonsisten.
 5. Jika internet terlalu lambat, ditengah jalan script akan hang tanpa error. Salah satu cara mengatasinya adalah dengan restart aplikasi, karena sulit didebug.
-6. Daftar LPSE *hardcoded*, karena website daftar semua LPSE tidak bisa dibaca oleh script.
+6. Daftar LPSE hardcoded, karena website daftar semua LPSE tidak bisa dibaca oleh script.
 /////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////
