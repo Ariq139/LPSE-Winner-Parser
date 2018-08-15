@@ -29,7 +29,7 @@ Max. Retry = 3
 1. Jika ada error 500/403/404 di console, tolong diabaikan
 2. Console tidak sepenuhnya terupdate real time
 3. Tidak ada data Evaluasi, karena terlalu inkonsisten
-4. Jika internet terlalu lambat, script akan hang tanpa error. Salah satu caranya adalah dengan restart aplikasi, karena sulit didebug.
+4. Jika internet terlalu lambat, ditengah jalan script akan hang tanpa error. Salah satu cara mengatasinya adalah dengan restart aplikasi, karena sulit didebug.
 
 ## Graph Exporting
 1. Pilih tab Graph/Network
