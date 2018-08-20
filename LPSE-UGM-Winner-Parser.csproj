@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{407C92A8-219C-49F8-B606-70479BDA5F3E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LPSE_UGM_Winner_Parser</RootNamespace>
-    <AssemblyName>LPSE-UGM-Winner-Parser</AssemblyName>
+    <RootNamespace>LPSE_Winner_Parser</RootNamespace>
+    <AssemblyName>LPSE-Winner-Parser</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
